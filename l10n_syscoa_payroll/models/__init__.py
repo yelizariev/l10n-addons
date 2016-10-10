@@ -20,7 +20,7 @@
 #
 ##############################################################################
 
-from . import l10n_ergobit_payroll
+from . import l10n_syscoa_payroll
 
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

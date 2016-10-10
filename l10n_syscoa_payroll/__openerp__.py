@@ -48,18 +48,18 @@ Generic Payroll Management Senegal
     ],
     'depends': [
         'hr_payroll',
-        'hr_holidays_yearly_legal_leave',
+        'hr_holidays_legal_leave',
         'hr_holidays_compute_days',
     ],
     'data': [
-        'views/l10n_ergobit_payroll_view.xml',
-        'l10n_ergobit_payroll_report.xml',
+        'views/l10n_syscoa_payroll_view.xml',
+        'l10n_syscoa_payroll_report.xml',
 
-        'data/l10n_ergobit_account_data.xml',
-        'data/l10n_ergobit_contract_data.xml',
-        'data/l10n_ergobit_payroll_data.xml',
+        'data/l10n_syscoa_account_data.xml',
+        'data/l10n_syscoa_contract_data.xml',
+        'data/l10n_syscoa_payroll_data.xml',
 
-        'report/ergobit_report_payslip.xml',
+        'report/syscoa_report_payslip.xml',
     ],
     'installable': True,
     'auto_install': False,

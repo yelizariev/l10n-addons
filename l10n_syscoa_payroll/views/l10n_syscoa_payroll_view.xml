@@ -2,8 +2,8 @@
 <openerp>
     <data>
 
-        <record id="res_company_form_l10n_ergobit_payroll" model="ir.ui.view">
-            <field name="name">res.company.form.l10n.ergobit.payroll</field>
+        <record id="res_company_form_l10n_syscoa_payroll" model="ir.ui.view">
+            <field name="name">res.company.form.l10n.syscoa.payroll</field>
             <field name="model">res.company</field>
             <field name="priority">20</field>
             <field name="inherit_id" ref="base.view_company_form" />
@@ -30,8 +30,8 @@
             </field>
         </record>
 
-        <record id="hr_employee_form_l10n_ergobit_payroll" model="ir.ui.view">
-            <field name="name">hr.employee.form.l10n.ergobit.payroll</field>
+        <record id="hr_employee_form_l10n_syscoa_payroll" model="ir.ui.view">
+            <field name="name">hr.employee.form.l10n.syscoa.payroll</field>
             <field name="model">hr.employee</field>
             <field name="priority">20</field>
             <field name="inherit_id" ref="hr.view_employee_form" />
@@ -103,8 +103,8 @@
 -->
 
 
-        <record id="hr_contract_view_tree_l10n_ergobit_payroll" model="ir.ui.view">
-            <field name="name">hr.contract.view.tree.l10n.ergobit.payroll</field>
+        <record id="hr_contract_view_tree_l10n_syscoa_payroll" model="ir.ui.view">
+            <field name="name">hr.contract.view.tree.l10n.syscoa.payroll</field>
             <field name="model">hr.contract</field>
             <field name="inherit_id" ref="hr_contract.hr_contract_view_tree" />
             <field name="arch" type="xml">
@@ -118,8 +118,8 @@
             </field>
         </record>
 
-        <record id="hr_contract_view_form_l10n_ergobit_payroll" model="ir.ui.view">
-            <field name="name">hr.contract.view.form.l10n.ergobit.payroll</field>
+        <record id="hr_contract_view_form_l10n_syscoa_payroll" model="ir.ui.view">
+            <field name="name">hr.contract.view.form.l10n.syscoa.payroll</field>
             <field name="model">hr.contract</field>
             <field name="priority">20</field>
             <field name="inherit_id" ref="hr_payroll.hr_contract_form_inherit" />
@@ -287,8 +287,8 @@
             </field>
         </record>
 
-        <record id="hr_payslip_form_l10n_ergobit_payroll" model="ir.ui.view">
-            <field name="name">hr.payslip.form.l10n.ergobit.payroll</field>
+        <record id="hr_payslip_form_l10n_syscoa_payroll" model="ir.ui.view">
+            <field name="name">hr.payslip.form.l10n.syscoa.payroll</field>
             <field name="model">hr.payslip</field>
             <field name="priority">20</field>
             <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form" />

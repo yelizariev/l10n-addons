@@ -256,7 +256,7 @@
             <field name="name">Salaire de base par heure</field>
             <field name="sequence" eval="2" />
             <field name="code">B100</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.TOTM" />
+            <field name="category_id" ref="l10n_syscoa_payroll.TOTM" />
             <field name="condition_select">none</field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">result = (contract.wage / worked_days.WORK100.number_of_hours if worked_days.WORK100 else 1.0)</field>
@@ -363,7 +363,7 @@
         <record id="erg_hr_pay_rule_overtime_premium_flat_entry" model="hr.rule.input">
             <field name="name">Montant forfaitaire pour les heures supplémentaires</field>
             <field name="code">HSUPFF</field>
-            <field name="input_id" ref="l10n_ergobit_payroll.erg_hr_pay_rule_overtime_premium_flat_" />
+            <field name="input_id" ref="l10n_syscoa_payroll.erg_hr_pay_rule_overtime_premium_flat_" />
         </record>
 
         <record id="erg_hr_pay_rule_overtime_premium_15" model="hr.salary.rule">
@@ -381,7 +381,7 @@
         <record id="erg_hr_pay_rule_overtime_premium_15_entry" model="hr.rule.input">
             <field name="name">Heures supplémentaires majorées à 15%</field>
             <field name="code">HSUP15</field>
-            <field name="input_id" ref="l10n_ergobit_payroll.erg_hr_pay_rule_overtime_premium_15" />
+            <field name="input_id" ref="l10n_syscoa_payroll.erg_hr_pay_rule_overtime_premium_15" />
         </record>
 
         <record id="erg_hr_pay_rule_overtime_premium_40" model="hr.salary.rule">
@@ -399,7 +399,7 @@
         <record id="erg_hr_pay_rule_overtime_premium_40_entry" model="hr.rule.input">
             <field name="name">Heures supplémentaires majorées à 40%</field>
             <field name="code">HSUP40</field>
-            <field name="input_id" ref="l10n_ergobit_payroll.erg_hr_pay_rule_overtime_premium_40" />
+            <field name="input_id" ref="l10n_syscoa_payroll.erg_hr_pay_rule_overtime_premium_40" />
         </record>
 
         <record id="erg_hr_pay_rule_overtime_premium_60" model="hr.salary.rule">
@@ -417,7 +417,7 @@
         <record id="erg_hr_pay_rule_overtime_premium_60_entry" model="hr.rule.input">
             <field name="name">Heures supplémentaires majorées à 60%</field>
             <field name="code">HSUP60</field>
-            <field name="input_id" ref="l10n_ergobit_payroll.erg_hr_pay_rule_overtime_premium_60" />
+            <field name="input_id" ref="l10n_syscoa_payroll.erg_hr_pay_rule_overtime_premium_60" />
         </record>
 
         <record id="erg_hr_pay_rule_overtime_premium_100_" model="hr.salary.rule">
@@ -435,7 +435,7 @@
         <record id="erg_hr_pay_rule_overtime_premium_100_entry" model="hr.rule.input">
             <field name="name">Heures supplémentaires majorées à 100%</field>
             <field name="code">HSUP100</field>
-            <field name="input_id" ref="l10n_ergobit_payroll.erg_hr_pay_rule_overtime_premium_100_" />
+            <field name="input_id" ref="l10n_syscoa_payroll.erg_hr_pay_rule_overtime_premium_100_" />
         </record>
 
 
@@ -559,7 +559,7 @@ result = res_calculated + res_contracted
         <record id="erg_hr_pay_rule_input_birth_allowance" model="hr.rule.input">
             <field name="name">Prime de naissance</field>
             <field name="code">PRNAIS</field>
-            <field name="input_id" ref="l10n_ergobit_payroll.erg_hr_pay_rule_birth_allowance" />
+            <field name="input_id" ref="l10n_syscoa_payroll.erg_hr_pay_rule_birth_allowance" />
         </record>
 
         <record id="erg_hr_pay_rule_marriage_allowance" model="hr.salary.rule">
@@ -575,7 +575,7 @@ result = res_calculated + res_contracted
         <record id="erg_hr_pay_rule_input_marriage_allowance" model="hr.rule.input">
             <field name="name">Prime de mariage</field>
             <field name="code">PRMARI</field>
-            <field name="input_id" ref="l10n_ergobit_payroll.erg_hr_pay_rule_marriage_allowance" />
+            <field name="input_id" ref="l10n_syscoa_payroll.erg_hr_pay_rule_marriage_allowance" />
         </record>
 
 
@@ -594,8 +594,8 @@ result = res_calculated + res_contracted
             <field name="name">Avantage pour logement et domesticité</field>
             <field name="sequence" eval="71" />
             <field name="code">NAT1</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.NATU" />
-            <field name="parent_rule_id" ref="l10n_ergobit_payroll.erg_hr_pay_rule_natural_advantage" />
+            <field name="category_id" ref="l10n_syscoa_payroll.NATU" />
+            <field name="parent_rule_id" ref="l10n_syscoa_payroll.erg_hr_pay_rule_natural_advantage" />
             <field name="appears_on_payslip" eval="False" />
             <field name="condition_select">python</field>
             <field name="condition_python">result = contract.domesticity_bonus &gt; 0</field>
@@ -607,8 +607,8 @@ result = res_calculated + res_contracted
             <field name="name">Avantage pour voiture de fonction</field>
             <field name="sequence" eval="72" />
             <field name="code">NAT2</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.NATU" />
-            <field name="parent_rule_id" ref="l10n_ergobit_payroll.erg_hr_pay_rule_natural_advantage" />
+            <field name="category_id" ref="l10n_syscoa_payroll.NATU" />
+            <field name="parent_rule_id" ref="l10n_syscoa_payroll.erg_hr_pay_rule_natural_advantage" />
             <field name="appears_on_payslip" eval="False" />
             <field name="condition_select">python</field>
             <field name="condition_python">result = contract.company_car_advantage &gt; 0</field>
@@ -620,8 +620,8 @@ result = res_calculated + res_contracted
             <field name="name">Avantage pour le téléphone</field>
             <field name="sequence" eval="73" />
             <field name="code">NAT3</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.NATU" />
-            <field name="parent_rule_id" ref="l10n_ergobit_payroll.erg_hr_pay_rule_natural_advantage" />
+            <field name="category_id" ref="l10n_syscoa_payroll.NATU" />
+            <field name="parent_rule_id" ref="l10n_syscoa_payroll.erg_hr_pay_rule_natural_advantage" />
             <field name="appears_on_payslip" eval="False" />
             <field name="condition_select">python</field>
             <field name="condition_python">result = contract.company_phone_advantage &gt; 0</field>
@@ -633,8 +633,8 @@ result = res_calculated + res_contracted
             <field name="name">Avantage pour eau et électricité</field>
             <field name="sequence" eval="74" />
             <field name="code">NAT4</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.NATU" />
-            <field name="parent_rule_id" ref="l10n_ergobit_payroll.erg_hr_pay_rule_natural_advantage" />
+            <field name="category_id" ref="l10n_syscoa_payroll.NATU" />
+            <field name="parent_rule_id" ref="l10n_syscoa_payroll.erg_hr_pay_rule_natural_advantage" />
             <field name="appears_on_payslip" eval="False" />
             <field name="condition_select">python</field>
             <field name="condition_python">result = contract.water_electricity_advantage &gt; 0</field>
@@ -646,8 +646,8 @@ result = res_calculated + res_contracted
             <field name="name">Avantage pour nourriture</field>
             <field name="sequence" eval="75" />
             <field name="code">NAT5</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.NATU" />
-            <field name="parent_rule_id" ref="l10n_ergobit_payroll.erg_hr_pay_rule_natural_advantage" />
+            <field name="category_id" ref="l10n_syscoa_payroll.NATU" />
+            <field name="parent_rule_id" ref="l10n_syscoa_payroll.erg_hr_pay_rule_natural_advantage" />
             <field name="appears_on_payslip" eval="False" />
             <field name="condition_select">python</field>
             <field name="condition_python">result = contract.food_advantage &gt; 0</field>
@@ -659,8 +659,8 @@ result = res_calculated + res_contracted
             <field name="name">Avantages familiaux</field>
             <field name="sequence" eval="76" />
             <field name="code">NAT6</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.NATU" />
-            <field name="parent_rule_id" ref="l10n_ergobit_payroll.erg_hr_pay_rule_natural_advantage" />
+            <field name="category_id" ref="l10n_syscoa_payroll.NATU" />
+            <field name="parent_rule_id" ref="l10n_syscoa_payroll.erg_hr_pay_rule_natural_advantage" />
             <field name="appears_on_payslip" eval="False" />
             <field name="condition_select">python</field>
             <field name="condition_python">result = contract.family_advantage &gt; 0</field>
@@ -672,7 +672,7 @@ result = res_calculated + res_contracted
             <field name="name">Indemnité de congé</field>
             <field name="sequence" eval="90" />
             <field name="code">390</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.ALW_C" />
+            <field name="category_id" ref="l10n_syscoa_payroll.ALW_C" />
             <field name="condition_select">python</field>
             <field name="condition_python">result = (payslip.type in ['leaves', 'mix']) and (payslip.holiday_allowance &gt; 0)</field>
             <field name="amount_select">code</field>
@@ -699,7 +699,7 @@ result = res_calculated + res_contracted
             <field name="name">Impôt/Revenu</field>
             <field name="sequence" eval="200" />
             <field name="code">500</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.TAX" />
+            <field name="category_id" ref="l10n_syscoa_payroll.TAX" />
             <field name="appears_on_payslip" eval="True" />
             <field name="condition_select">none</field>
             <field name="amount_select">code</field>
@@ -712,8 +712,8 @@ result = res_calculated + res_contracted
             <field name="name">Impôt/Revenu de la période</field>
             <field name="sequence" eval="195" />
             <field name="code">500PRD</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.TAX_P" />
-            <field name="parent_rule_id" ref="l10n_ergobit_payroll.erg_hr_pay_rule_ir" />
+            <field name="category_id" ref="l10n_syscoa_payroll.TAX_P" />
+            <field name="parent_rule_id" ref="l10n_syscoa_payroll.erg_hr_pay_rule_ir" />
             <field name="appears_on_payslip" eval="False" />
             <field name="condition_select">none</field>
             <field name="amount_select">code</field>
@@ -726,7 +726,7 @@ result = res_calculated + res_contracted
             <field name="name">Impôt/Revenu</field>
             <field name="sequence" eval="200" />
             <field name="code">500</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.TAX" />
+            <field name="category_id" ref="l10n_syscoa_payroll.TAX" />
             <field name="appears_on_payslip" eval="True" />
             <field name="condition_select">none</field>
             <field name="amount_select">code</field>
@@ -740,8 +740,8 @@ result = res_calculated + res_contracted
             <field name="name">Salaire brut annuel</field>
             <field name="sequence" eval="150" />
             <field name="code">X50</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.TAXX_P" />
-            <field name="parent_rule_id" ref="l10n_ergobit_payroll.erg_hr_pay_rule_ir_prd" />
+            <field name="category_id" ref="l10n_syscoa_payroll.TAXX_P" />
+            <field name="parent_rule_id" ref="l10n_syscoa_payroll.erg_hr_pay_rule_ir_prd" />
             <field name="appears_on_payslip" eval="False" />
             <field name="condition_select">none</field>
             <field name="amount_select">code</field>
@@ -752,8 +752,8 @@ result = res_calculated + res_contracted
             <field name="name">Abattement spécial et Abattement forfaitaire</field>
             <field name="sequence" eval="155" />
             <field name="code">X55</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.TAXX_P" />
-            <field name="parent_rule_id" ref="l10n_ergobit_payroll.erg_hr_pay_rule_ir_prd" />
+            <field name="category_id" ref="l10n_syscoa_payroll.TAXX_P" />
+            <field name="parent_rule_id" ref="l10n_syscoa_payroll.erg_hr_pay_rule_ir_prd" />
             <field name="appears_on_payslip" eval="False" />
             <field name="condition_select">none</field>
             <field name="amount_select">code</field>
@@ -770,8 +770,8 @@ result = special_exemption + flat_exemption
             <field name="name">Salaire annuel net imposable </field>
             <field name="sequence" eval="160" />
             <field name="code">X60</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.TAXX_P" />
-            <field name="parent_rule_id" ref="l10n_ergobit_payroll.erg_hr_pay_rule_ir_prd" />
+            <field name="category_id" ref="l10n_syscoa_payroll.TAXX_P" />
+            <field name="parent_rule_id" ref="l10n_syscoa_payroll.erg_hr_pay_rule_ir_prd" />
             <field name="appears_on_payslip" eval="False" />
             <field name="condition_select">none</field>
             <field name="amount_select">code</field>
@@ -782,8 +782,8 @@ result = special_exemption + flat_exemption
             <field name="name">Impôt annuel liquidé </field>
             <field name="sequence" eval="170" />
             <field name="code">X70</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.TAXX_P" />
-            <field name="parent_rule_id" ref="l10n_ergobit_payroll.erg_hr_pay_rule_ir_prd" />
+            <field name="category_id" ref="l10n_syscoa_payroll.TAXX_P" />
+            <field name="parent_rule_id" ref="l10n_syscoa_payroll.erg_hr_pay_rule_ir_prd" />
             <field name="appears_on_payslip" eval="False" />
             <field name="condition_select">none</field>
             <field name="amount_select">code</field>
@@ -794,8 +794,8 @@ result = special_exemption + flat_exemption
             <field name="name">Impôt annuel selon droit progressif (Intervalle 1)</field>
             <field name="sequence" eval="162" />
             <field name="code">X701</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.TAXX_P" />
-            <field name="parent_rule_id" ref="l10n_ergobit_payroll.erg_hr_pay_rule_tax_annual" />
+            <field name="category_id" ref="l10n_syscoa_payroll.TAXX_P" />
+            <field name="parent_rule_id" ref="l10n_syscoa_payroll.erg_hr_pay_rule_tax_annual" />
             <field name="appears_on_payslip" eval="False" />
             <field name="condition_select">none</field>
             <field name="amount_select">fix</field>
@@ -807,8 +807,8 @@ result = special_exemption + flat_exemption
             <field name="name">Impôt annuel selon droit progressif (Intervalle 2)</field>
             <field name="sequence" eval="163" />
             <field name="code">X702</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.TAXX_P" />
-            <field name="parent_rule_id" ref="l10n_ergobit_payroll.erg_hr_pay_rule_tax_annual" />
+            <field name="category_id" ref="l10n_syscoa_payroll.TAXX_P" />
+            <field name="parent_rule_id" ref="l10n_syscoa_payroll.erg_hr_pay_rule_tax_annual" />
             <field name="appears_on_payslip" eval="False" />
             <field name="condition_select">none</field>
             <field name="amount_select">percentage</field>
@@ -821,8 +821,8 @@ result = special_exemption + flat_exemption
             <field name="name">Impôt annuel selon droit progressif (Intervalle 3)</field>
             <field name="sequence" eval="164" />
             <field name="code">X703</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.TAXX_P" />
-            <field name="parent_rule_id" ref="l10n_ergobit_payroll.erg_hr_pay_rule_tax_annual" />
+            <field name="category_id" ref="l10n_syscoa_payroll.TAXX_P" />
+            <field name="parent_rule_id" ref="l10n_syscoa_payroll.erg_hr_pay_rule_tax_annual" />
             <field name="appears_on_payslip" eval="False" />
             <field name="condition_select">none</field>
             <field name="amount_select">percentage</field>
@@ -835,8 +835,8 @@ result = special_exemption + flat_exemption
             <field name="name">Impôt annuel selon droit progressif (Intervalle 4)</field>
             <field name="sequence" eval="165" />
             <field name="code">X704</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.TAXX_P" />
-            <field name="parent_rule_id" ref="l10n_ergobit_payroll.erg_hr_pay_rule_tax_annual" />
+            <field name="category_id" ref="l10n_syscoa_payroll.TAXX_P" />
+            <field name="parent_rule_id" ref="l10n_syscoa_payroll.erg_hr_pay_rule_tax_annual" />
             <field name="appears_on_payslip" eval="False" />
             <field name="condition_select">none</field>
             <field name="amount_select">percentage</field>
@@ -849,8 +849,8 @@ result = special_exemption + flat_exemption
             <field name="name">Impôt annuel selon droit progressif (Intervalle 5)</field>
             <field name="sequence" eval="166" />
             <field name="code">X705</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.TAXX_P" />
-            <field name="parent_rule_id" ref="l10n_ergobit_payroll.erg_hr_pay_rule_tax_annual" />
+            <field name="category_id" ref="l10n_syscoa_payroll.TAXX_P" />
+            <field name="parent_rule_id" ref="l10n_syscoa_payroll.erg_hr_pay_rule_tax_annual" />
             <field name="appears_on_payslip" eval="False" />
             <field name="condition_select">none</field>
             <field name="amount_select">percentage</field>
@@ -863,8 +863,8 @@ result = special_exemption + flat_exemption
             <field name="name">Impôt annuel selon droit progressif (Intervalle 6)</field>
             <field name="sequence" eval="167" />
             <field name="code">X706</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.TAXX_P" />
-            <field name="parent_rule_id" ref="l10n_ergobit_payroll.erg_hr_pay_rule_tax_annual" />
+            <field name="category_id" ref="l10n_syscoa_payroll.TAXX_P" />
+            <field name="parent_rule_id" ref="l10n_syscoa_payroll.erg_hr_pay_rule_tax_annual" />
             <field name="appears_on_payslip" eval="False" />
             <field name="condition_select">none</field>
             <field name="amount_select">percentage</field>
@@ -877,8 +877,8 @@ result = special_exemption + flat_exemption
             <field name="name">Nombre de parts sociales</field>
             <field name="sequence" eval="175" />
             <field name="code">X75</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.TAXX_P" />
-            <field name="parent_rule_id" ref="l10n_ergobit_payroll.erg_hr_pay_rule_ir_prd" />
+            <field name="category_id" ref="l10n_syscoa_payroll.TAXX_P" />
+            <field name="parent_rule_id" ref="l10n_syscoa_payroll.erg_hr_pay_rule_ir_prd" />
             <field name="appears_on_payslip" eval="False" />
             <field name="condition_select">none</field>
             <field name="amount_select">code</field>
@@ -889,8 +889,8 @@ result = special_exemption + flat_exemption
             <field name="name">Pourcentage de l'abattement selon parts sociales</field>
             <field name="sequence" eval="180" />
             <field name="code">X80</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.TAXX_P" />
-            <field name="parent_rule_id" ref="l10n_ergobit_payroll.erg_hr_pay_rule_ir_prd" />
+            <field name="category_id" ref="l10n_syscoa_payroll.TAXX_P" />
+            <field name="parent_rule_id" ref="l10n_syscoa_payroll.erg_hr_pay_rule_ir_prd" />
             <field name="appears_on_payslip" eval="False" />
             <field name="condition_select">none</field>
             <field name="amount_select">code</field>
@@ -908,8 +908,8 @@ result = percentage
             <field name="name">Abattement annuel selon parts sociales</field>
             <field name="sequence" eval="190" />
             <field name="code">X85</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.TAXX_P" />
-            <field name="parent_rule_id" ref="l10n_ergobit_payroll.erg_hr_pay_rule_ir_prd" />
+            <field name="category_id" ref="l10n_syscoa_payroll.TAXX_P" />
+            <field name="parent_rule_id" ref="l10n_syscoa_payroll.erg_hr_pay_rule_ir_prd" />
             <field name="appears_on_payslip" eval="False" />
             <field name="condition_select">none</field>
             <field name="amount_select">code</field>
@@ -920,8 +920,8 @@ result = percentage
             <field name="name">Abattement selon Parts: 1.0</field>
             <field name="sequence" eval="181" />
             <field name="code">XP10</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.TAXXP_P" />
-            <field name="parent_rule_id" ref="l10n_ergobit_payroll.erg_hr_pay_rule_part_social_discount" />
+            <field name="category_id" ref="l10n_syscoa_payroll.TAXXP_P" />
+            <field name="parent_rule_id" ref="l10n_syscoa_payroll.erg_hr_pay_rule_part_social_discount" />
             <field name="appears_on_payslip" eval="False" />
             <field name="condition_select">python</field>
             <field name="condition_python">result = (X75 == 1.0)</field>
@@ -934,8 +934,8 @@ result = percentage
             <field name="name">Abattement selon Parts: 1.5</field>
             <field name="sequence" eval="182" />
             <field name="code">XP15</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.TAXXP_P" />
-            <field name="parent_rule_id" ref="l10n_ergobit_payroll.erg_hr_pay_rule_part_social_discount" />
+            <field name="category_id" ref="l10n_syscoa_payroll.TAXXP_P" />
+            <field name="parent_rule_id" ref="l10n_syscoa_payroll.erg_hr_pay_rule_part_social_discount" />
             <field name="appears_on_payslip" eval="False" />
             <field name="condition_select">python</field>
             <field name="condition_python">result = (X75 == 1.5)</field>
@@ -951,8 +951,8 @@ result = (min if ((X70 * perc) &lt; min) else (max if ((X70 * perc) &gt; max) el
             <field name="name">Abattement selon Parts: 2.0</field>
             <field name="sequence" eval="183" />
             <field name="code">XP20</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.TAXXP_P" />
-            <field name="parent_rule_id" ref="l10n_ergobit_payroll.erg_hr_pay_rule_part_social_discount" />
+            <field name="category_id" ref="l10n_syscoa_payroll.TAXXP_P" />
+            <field name="parent_rule_id" ref="l10n_syscoa_payroll.erg_hr_pay_rule_part_social_discount" />
             <field name="appears_on_payslip" eval="False" />
             <field name="condition_select">python</field>
             <field name="condition_python">result = (X75 == 2.0)</field>
@@ -968,8 +968,8 @@ result = (min if ((X70 * perc) &lt; min) else (max if ((X70 * perc) &gt; max) el
             <field name="name">Abattement selon Parts: 2.5</field>
             <field name="sequence" eval="184" />
             <field name="code">XP25</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.TAXXP_P" />
-            <field name="parent_rule_id" ref="l10n_ergobit_payroll.erg_hr_pay_rule_part_social_discount" />
+            <field name="category_id" ref="l10n_syscoa_payroll.TAXXP_P" />
+            <field name="parent_rule_id" ref="l10n_syscoa_payroll.erg_hr_pay_rule_part_social_discount" />
             <field name="appears_on_payslip" eval="False" />
             <field name="condition_select">python</field>
             <field name="condition_python">result = (X75 == 2.5)</field>
@@ -985,8 +985,8 @@ result = (min if ((X70 * perc) &lt; min) else (max if ((X70 * perc) &gt; max) el
             <field name="name">Abattement selon Parts: 3.0</field>
             <field name="sequence" eval="185" />
             <field name="code">XP30</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.TAXXP_P" />
-            <field name="parent_rule_id" ref="l10n_ergobit_payroll.erg_hr_pay_rule_part_social_discount" />
+            <field name="category_id" ref="l10n_syscoa_payroll.TAXXP_P" />
+            <field name="parent_rule_id" ref="l10n_syscoa_payroll.erg_hr_pay_rule_part_social_discount" />
             <field name="appears_on_payslip" eval="False" />
             <field name="condition_select">python</field>
             <field name="condition_python">result = (X75 == 3.0)</field>
@@ -1002,8 +1002,8 @@ result = (min if ((X70 * perc) &lt; min) else (max if ((X70 * perc) &gt; max) el
             <field name="name">Abattement selon Parts: 3.5</field>
             <field name="sequence" eval="186" />
             <field name="code">XP35</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.TAXXP_P" />
-            <field name="parent_rule_id" ref="l10n_ergobit_payroll.erg_hr_pay_rule_part_social_discount" />
+            <field name="category_id" ref="l10n_syscoa_payroll.TAXXP_P" />
+            <field name="parent_rule_id" ref="l10n_syscoa_payroll.erg_hr_pay_rule_part_social_discount" />
             <field name="appears_on_payslip" eval="False" />
             <field name="condition_select">python</field>
             <field name="condition_python">result = (X75 == 3.5)</field>
@@ -1019,8 +1019,8 @@ result = (min if ((X70 * perc) &lt; min) else (max if ((X70 * perc) &gt; max) el
             <field name="name">Abattement selon Parts: 4.0</field>
             <field name="sequence" eval="187" />
             <field name="code">XP40</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.TAXXP_P" />
-            <field name="parent_rule_id" ref="l10n_ergobit_payroll.erg_hr_pay_rule_part_social_discount" />
+            <field name="category_id" ref="l10n_syscoa_payroll.TAXXP_P" />
+            <field name="parent_rule_id" ref="l10n_syscoa_payroll.erg_hr_pay_rule_part_social_discount" />
             <field name="appears_on_payslip" eval="False" />
             <field name="condition_select">python</field>
             <field name="condition_python">result = (X75 == 4.0)</field>
@@ -1036,8 +1036,8 @@ result = (min if ((X70 * perc) &lt; min) else (max if ((X70 * perc) &gt; max) el
             <field name="name">Abattement selon Parts: 4.5</field>
             <field name="sequence" eval="188" />
             <field name="code">XP45</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.TAXXP_P" />
-            <field name="parent_rule_id" ref="l10n_ergobit_payroll.erg_hr_pay_rule_part_social_discount" />
+            <field name="category_id" ref="l10n_syscoa_payroll.TAXXP_P" />
+            <field name="parent_rule_id" ref="l10n_syscoa_payroll.erg_hr_pay_rule_part_social_discount" />
             <field name="appears_on_payslip" eval="False" />
             <field name="condition_select">python</field>
             <field name="condition_python">result = (X75 == 4.5)</field>
@@ -1053,8 +1053,8 @@ result = (min if ((X70 * perc) &lt; min) else (max if ((X70 * perc) &gt; max) el
             <field name="name">Abattement selon Parts: 5.0</field>
             <field name="sequence" eval="189" />
             <field name="code">XP50</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.TAXXP_P" />
-            <field name="parent_rule_id" ref="l10n_ergobit_payroll.erg_hr_pay_rule_part_social_discount" />
+            <field name="category_id" ref="l10n_syscoa_payroll.TAXXP_P" />
+            <field name="parent_rule_id" ref="l10n_syscoa_payroll.erg_hr_pay_rule_part_social_discount" />
             <field name="appears_on_payslip" eval="False" />
             <field name="condition_select">python</field>
             <field name="condition_python">result = (X75 == 5.0)</field>
@@ -1070,8 +1070,8 @@ result = (min if ((X70 * perc) &lt; min) else (max if ((X70 * perc) &gt; max) el
             <field name="name">Abattement pour fonctionaire du gouvernement (10%)</field>
             <field name="sequence" eval="190" />
             <field name="code">X90</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.TAXX_P" />
-            <field name="parent_rule_id" ref="l10n_ergobit_payroll.erg_hr_pay_rule_ir_prd" />
+            <field name="category_id" ref="l10n_syscoa_payroll.TAXX_P" />
+            <field name="parent_rule_id" ref="l10n_syscoa_payroll.erg_hr_pay_rule_ir_prd" />
             <field name="appears_on_payslip" eval="False" />
             <field name="condition_select">none</field>
             <field name="amount_select">code</field>
@@ -1084,8 +1084,8 @@ result = (min if ((X70 * perc) &lt; min) else (max if ((X70 * perc) &gt; max) el
             <field name="name">Impôt sur le revenu annuel</field>
             <field name="sequence" eval="193" />
             <field name="code">X95</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.TAXX_P" />
-            <field name="parent_rule_id" ref="l10n_ergobit_payroll.erg_hr_pay_rule_ir_prd" />
+            <field name="category_id" ref="l10n_syscoa_payroll.TAXX_P" />
+            <field name="parent_rule_id" ref="l10n_syscoa_payroll.erg_hr_pay_rule_ir_prd" />
             <field name="appears_on_payslip" eval="False" />
             <field name="condition_select">none</field>
             <field name="amount_select">code</field>
@@ -1099,8 +1099,8 @@ result = (min if ((X70 * perc) &lt; min) else (max if ((X70 * perc) &gt; max) el
             <field name="name">Impôt/Revenu du congé</field>
             <field name="sequence" eval="197" />
             <field name="code">500CNG</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.TAX_C" />
-            <field name="parent_rule_id" ref="l10n_ergobit_payroll.erg_hr_pay_rule_ir" />
+            <field name="category_id" ref="l10n_syscoa_payroll.TAX_C" />
+            <field name="parent_rule_id" ref="l10n_syscoa_payroll.erg_hr_pay_rule_ir" />
             <field name="appears_on_payslip" eval="False" />
             <field name="condition_select">none</field>
             <field name="amount_select">code</field>
@@ -1111,8 +1111,8 @@ result = (min if ((X70 * perc) &lt; min) else (max if ((X70 * perc) &gt; max) el
             <field name="name">Salaire brut annuel</field>
             <field name="sequence" eval="150" />
             <field name="code">CX50</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.TAXX_C" />
-            <field name="parent_rule_id" ref="l10n_ergobit_payroll.erg_hr_pay_rule_ir_cng" />
+            <field name="category_id" ref="l10n_syscoa_payroll.TAXX_C" />
+            <field name="parent_rule_id" ref="l10n_syscoa_payroll.erg_hr_pay_rule_ir_cng" />
             <field name="appears_on_payslip" eval="False" />
             <field name="condition_select">none</field>
             <field name="amount_select">code</field>
@@ -1123,8 +1123,8 @@ result = (min if ((X70 * perc) &lt; min) else (max if ((X70 * perc) &gt; max) el
             <field name="name">Abattement spécial et Abattement forfaitaire</field>
             <field name="sequence" eval="155" />
             <field name="code">CX55</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.TAXX_C" />
-            <field name="parent_rule_id" ref="l10n_ergobit_payroll.erg_hr_pay_rule_ir_cng" />
+            <field name="category_id" ref="l10n_syscoa_payroll.TAXX_C" />
+            <field name="parent_rule_id" ref="l10n_syscoa_payroll.erg_hr_pay_rule_ir_cng" />
             <field name="appears_on_payslip" eval="False" />
             <field name="condition_select">none</field>
             <field name="amount_select">code</field>
@@ -1141,8 +1141,8 @@ result = special_exemption + flat_exemption
             <field name="name">Salaire annuel net imposable </field>
             <field name="sequence" eval="160" />
             <field name="code">CX60</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.TAXX_C" />
-            <field name="parent_rule_id" ref="l10n_ergobit_payroll.erg_hr_pay_rule_ir_cng" />
+            <field name="category_id" ref="l10n_syscoa_payroll.TAXX_C" />
+            <field name="parent_rule_id" ref="l10n_syscoa_payroll.erg_hr_pay_rule_ir_cng" />
             <field name="appears_on_payslip" eval="False" />
             <field name="condition_select">none</field>
             <field name="amount_select">code</field>
@@ -1153,8 +1153,8 @@ result = special_exemption + flat_exemption
             <field name="name">Impôt annuel liquidé </field>
             <field name="sequence" eval="170" />
             <field name="code">CX70</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.TAXX_C" />
-            <field name="parent_rule_id" ref="l10n_ergobit_payroll.erg_hr_pay_rule_ir_cng" />
+            <field name="category_id" ref="l10n_syscoa_payroll.TAXX_C" />
+            <field name="parent_rule_id" ref="l10n_syscoa_payroll.erg_hr_pay_rule_ir_cng" />
             <field name="appears_on_payslip" eval="False" />
             <field name="condition_select">none</field>
             <field name="amount_select">code</field>
@@ -1165,8 +1165,8 @@ result = special_exemption + flat_exemption
             <field name="name">Impôt annuel selon droit progressif (Intervalle 1)</field>
             <field name="sequence" eval="162" />
             <field name="code">CX701</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.TAXX_C" />
-            <field name="parent_rule_id" ref="l10n_ergobit_payroll.erg_hr_pay_rule_tax_annual_cng" />
+            <field name="category_id" ref="l10n_syscoa_payroll.TAXX_C" />
+            <field name="parent_rule_id" ref="l10n_syscoa_payroll.erg_hr_pay_rule_tax_annual_cng" />
             <field name="appears_on_payslip" eval="False" />
             <field name="condition_select">none</field>
             <field name="amount_select">fix</field>
@@ -1178,8 +1178,8 @@ result = special_exemption + flat_exemption
             <field name="name">Impôt annuel selon droit progressif (Intervalle 2)</field>
             <field name="sequence" eval="163" />
             <field name="code">CX702</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.TAXX_C" />
-            <field name="parent_rule_id" ref="l10n_ergobit_payroll.erg_hr_pay_rule_tax_annual_cng" />
+            <field name="category_id" ref="l10n_syscoa_payroll.TAXX_C" />
+            <field name="parent_rule_id" ref="l10n_syscoa_payroll.erg_hr_pay_rule_tax_annual_cng" />
             <field name="appears_on_payslip" eval="False" />
             <field name="condition_select">none</field>
             <field name="amount_select">percentage</field>
@@ -1192,8 +1192,8 @@ result = special_exemption + flat_exemption
             <field name="name">Impôt annuel selon droit progressif (Intervalle 3)</field>
             <field name="sequence" eval="164" />
             <field name="code">CX703</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.TAXX_C" />
-            <field name="parent_rule_id" ref="l10n_ergobit_payroll.erg_hr_pay_rule_tax_annual_cng" />
+            <field name="category_id" ref="l10n_syscoa_payroll.TAXX_C" />
+            <field name="parent_rule_id" ref="l10n_syscoa_payroll.erg_hr_pay_rule_tax_annual_cng" />
             <field name="appears_on_payslip" eval="False" />
             <field name="condition_select">none</field>
             <field name="amount_select">percentage</field>
@@ -1206,8 +1206,8 @@ result = special_exemption + flat_exemption
             <field name="name">Impôt annuel selon droit progressif (Intervalle 4)</field>
             <field name="sequence" eval="165" />
             <field name="code">CX704</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.TAXX_C" />
-            <field name="parent_rule_id" ref="l10n_ergobit_payroll.erg_hr_pay_rule_tax_annual_cng" />
+            <field name="category_id" ref="l10n_syscoa_payroll.TAXX_C" />
+            <field name="parent_rule_id" ref="l10n_syscoa_payroll.erg_hr_pay_rule_tax_annual_cng" />
             <field name="appears_on_payslip" eval="False" />
             <field name="condition_select">none</field>
             <field name="amount_select">percentage</field>
@@ -1220,8 +1220,8 @@ result = special_exemption + flat_exemption
             <field name="name">Impôt annuel selon droit progressif (Intervalle 5)</field>
             <field name="sequence" eval="166" />
             <field name="code">CX705</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.TAXX_C" />
-            <field name="parent_rule_id" ref="l10n_ergobit_payroll.erg_hr_pay_rule_tax_annual_cng" />
+            <field name="category_id" ref="l10n_syscoa_payroll.TAXX_C" />
+            <field name="parent_rule_id" ref="l10n_syscoa_payroll.erg_hr_pay_rule_tax_annual_cng" />
             <field name="appears_on_payslip" eval="False" />
             <field name="condition_select">none</field>
             <field name="amount_select">percentage</field>
@@ -1234,8 +1234,8 @@ result = special_exemption + flat_exemption
             <field name="name">Impôt annuel selon droit progressif (Intervalle 6)</field>
             <field name="sequence" eval="167" />
             <field name="code">CX706</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.TAXX_C" />
-            <field name="parent_rule_id" ref="l10n_ergobit_payroll.erg_hr_pay_rule_tax_annual_cng" />
+            <field name="category_id" ref="l10n_syscoa_payroll.TAXX_C" />
+            <field name="parent_rule_id" ref="l10n_syscoa_payroll.erg_hr_pay_rule_tax_annual_cng" />
             <field name="appears_on_payslip" eval="False" />
             <field name="condition_select">none</field>
             <field name="amount_select">percentage</field>
@@ -1248,8 +1248,8 @@ result = special_exemption + flat_exemption
             <field name="name">Nombre de parts sociales</field>
             <field name="sequence" eval="175" />
             <field name="code">CX75</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.TAXX_C" />
-            <field name="parent_rule_id" ref="l10n_ergobit_payroll.erg_hr_pay_rule_ir_cng" />
+            <field name="category_id" ref="l10n_syscoa_payroll.TAXX_C" />
+            <field name="parent_rule_id" ref="l10n_syscoa_payroll.erg_hr_pay_rule_ir_cng" />
             <field name="appears_on_payslip" eval="False" />
             <field name="condition_select">none</field>
             <field name="amount_select">code</field>
@@ -1260,8 +1260,8 @@ result = special_exemption + flat_exemption
             <field name="name">Pourcentage de l'abattement selon parts sociales</field>
             <field name="sequence" eval="180" />
             <field name="code">CX80</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.TAXX_C" />
-            <field name="parent_rule_id" ref="l10n_ergobit_payroll.erg_hr_pay_rule_ir_cng" />
+            <field name="category_id" ref="l10n_syscoa_payroll.TAXX_C" />
+            <field name="parent_rule_id" ref="l10n_syscoa_payroll.erg_hr_pay_rule_ir_cng" />
             <field name="appears_on_payslip" eval="False" />
             <field name="condition_select">none</field>
             <field name="amount_select">code</field>
@@ -1279,8 +1279,8 @@ result = percentage
             <field name="name">Abattement annuel selon parts sociales</field>
             <field name="sequence" eval="190" />
             <field name="code">CX85</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.TAXX_C" />
-            <field name="parent_rule_id" ref="l10n_ergobit_payroll.erg_hr_pay_rule_ir_cng" />
+            <field name="category_id" ref="l10n_syscoa_payroll.TAXX_C" />
+            <field name="parent_rule_id" ref="l10n_syscoa_payroll.erg_hr_pay_rule_ir_cng" />
             <field name="appears_on_payslip" eval="False" />
             <field name="condition_select">none</field>
             <field name="amount_select">code</field>
@@ -1291,8 +1291,8 @@ result = percentage
             <field name="name">Abattement selon Parts: 1.0</field>
             <field name="sequence" eval="181" />
             <field name="code">CXP10</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.TAXXP_C" />
-            <field name="parent_rule_id" ref="l10n_ergobit_payroll.erg_hr_pay_rule_part_social_discount" />
+            <field name="category_id" ref="l10n_syscoa_payroll.TAXXP_C" />
+            <field name="parent_rule_id" ref="l10n_syscoa_payroll.erg_hr_pay_rule_part_social_discount" />
             <field name="appears_on_payslip" eval="False" />
             <field name="condition_select">python</field>
             <field name="condition_python">result = (CX75 == 1.0)</field>
@@ -1305,8 +1305,8 @@ result = percentage
             <field name="name">Abattement selon Parts: 1.5</field>
             <field name="sequence" eval="182" />
             <field name="code">CXP15</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.TAXXP_C" />
-            <field name="parent_rule_id" ref="l10n_ergobit_payroll.erg_hr_pay_rule_part_social_discount" />
+            <field name="category_id" ref="l10n_syscoa_payroll.TAXXP_C" />
+            <field name="parent_rule_id" ref="l10n_syscoa_payroll.erg_hr_pay_rule_part_social_discount" />
             <field name="appears_on_payslip" eval="False" />
             <field name="condition_select">python</field>
             <field name="condition_python">result = (CX75 == 1.5)</field>
@@ -1322,8 +1322,8 @@ result = (min if ((CX70 * perc) &lt; min) else (max if ((CX70 * perc) &gt; max) 
             <field name="name">Abattement selon Parts: 2.0</field>
             <field name="sequence" eval="183" />
             <field name="code">CXP20</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.TAXXP_C" />
-            <field name="parent_rule_id" ref="l10n_ergobit_payroll.erg_hr_pay_rule_part_social_discount" />
+            <field name="category_id" ref="l10n_syscoa_payroll.TAXXP_C" />
+            <field name="parent_rule_id" ref="l10n_syscoa_payroll.erg_hr_pay_rule_part_social_discount" />
             <field name="appears_on_payslip" eval="False" />
             <field name="condition_select">python</field>
             <field name="condition_python">result = (CX75 == 2.0)</field>
@@ -1339,8 +1339,8 @@ result = (min if ((CX70 * perc) &lt; min) else (max if ((CX70 * perc) &gt; max) 
             <field name="name">Abattement selon Parts: 2.5</field>
             <field name="sequence" eval="184" />
             <field name="code">CXP25</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.TAXXP_C" />
-            <field name="parent_rule_id" ref="l10n_ergobit_payroll.erg_hr_pay_rule_part_social_discount" />
+            <field name="category_id" ref="l10n_syscoa_payroll.TAXXP_C" />
+            <field name="parent_rule_id" ref="l10n_syscoa_payroll.erg_hr_pay_rule_part_social_discount" />
             <field name="appears_on_payslip" eval="False" />
             <field name="condition_select">python</field>
             <field name="condition_python">result = (CX75 == 2.5)</field>
@@ -1356,8 +1356,8 @@ result = (min if ((CX70 * perc) &lt; min) else (max if ((CX70 * perc) &gt; max) 
             <field name="name">Abattement selon Parts: 3.0</field>
             <field name="sequence" eval="185" />
             <field name="code">CXP30</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.TAXXP_C" />
-            <field name="parent_rule_id" ref="l10n_ergobit_payroll.erg_hr_pay_rule_part_social_discount" />
+            <field name="category_id" ref="l10n_syscoa_payroll.TAXXP_C" />
+            <field name="parent_rule_id" ref="l10n_syscoa_payroll.erg_hr_pay_rule_part_social_discount" />
             <field name="appears_on_payslip" eval="False" />
             <field name="condition_select">python</field>
             <field name="condition_python">result = (CX75 == 3.0)</field>
@@ -1373,8 +1373,8 @@ result = (min if ((CX70 * perc) &lt; min) else (max if ((CX70 * perc) &gt; max) 
             <field name="name">Abattement selon Parts: 3.5</field>
             <field name="sequence" eval="186" />
             <field name="code">CXP35</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.TAXXP_C" />
-            <field name="parent_rule_id" ref="l10n_ergobit_payroll.erg_hr_pay_rule_part_social_discount" />
+            <field name="category_id" ref="l10n_syscoa_payroll.TAXXP_C" />
+            <field name="parent_rule_id" ref="l10n_syscoa_payroll.erg_hr_pay_rule_part_social_discount" />
             <field name="appears_on_payslip" eval="False" />
             <field name="condition_select">python</field>
             <field name="condition_python">result = (CX75 == 3.5)</field>
@@ -1390,8 +1390,8 @@ result = (min if ((CX70 * perc) &lt; min) else (max if ((CX70 * perc) &gt; max) 
             <field name="name">Abattement selon Parts: 4.0</field>
             <field name="sequence" eval="187" />
             <field name="code">CXP40</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.TAXXP_C" />
-            <field name="parent_rule_id" ref="l10n_ergobit_payroll.erg_hr_pay_rule_part_social_discount" />
+            <field name="category_id" ref="l10n_syscoa_payroll.TAXXP_C" />
+            <field name="parent_rule_id" ref="l10n_syscoa_payroll.erg_hr_pay_rule_part_social_discount" />
             <field name="appears_on_payslip" eval="False" />
             <field name="condition_select">python</field>
             <field name="condition_python">result = (CX75 == 4.0)</field>
@@ -1407,8 +1407,8 @@ result = (min if ((CX70 * perc) &lt; min) else (max if ((CX70 * perc) &gt; max) 
             <field name="name">Abattement selon Parts: 4.5</field>
             <field name="sequence" eval="188" />
             <field name="code">CXP45</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.TAXXP_C" />
-            <field name="parent_rule_id" ref="l10n_ergobit_payroll.erg_hr_pay_rule_part_social_discount" />
+            <field name="category_id" ref="l10n_syscoa_payroll.TAXXP_C" />
+            <field name="parent_rule_id" ref="l10n_syscoa_payroll.erg_hr_pay_rule_part_social_discount" />
             <field name="appears_on_payslip" eval="False" />
             <field name="condition_select">python</field>
             <field name="condition_python">result = (CX75 == 4.5)</field>
@@ -1424,8 +1424,8 @@ result = (min if ((CX70 * perc) &lt; min) else (max if ((CX70 * perc) &gt; max) 
             <field name="name">Abattement selon Parts: 5.0</field>
             <field name="sequence" eval="189" />
             <field name="code">CXP50</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.TAXXP_C" />
-            <field name="parent_rule_id" ref="l10n_ergobit_payroll.erg_hr_pay_rule_part_social_discount" />
+            <field name="category_id" ref="l10n_syscoa_payroll.TAXXP_C" />
+            <field name="parent_rule_id" ref="l10n_syscoa_payroll.erg_hr_pay_rule_part_social_discount" />
             <field name="appears_on_payslip" eval="False" />
             <field name="condition_select">python</field>
             <field name="condition_python">result = (CX75 == 5.0)</field>
@@ -1441,8 +1441,8 @@ result = (min if ((CX70 * perc) &lt; min) else (max if ((CX70 * perc) &gt; max) 
             <field name="name">Abattement pour fonctionaire du gouvernement (10%)</field>
             <field name="sequence" eval="190" />
             <field name="code">CX90</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.TAXX_C" />
-            <field name="parent_rule_id" ref="l10n_ergobit_payroll.erg_hr_pay_rule_ir_cng" />
+            <field name="category_id" ref="l10n_syscoa_payroll.TAXX_C" />
+            <field name="parent_rule_id" ref="l10n_syscoa_payroll.erg_hr_pay_rule_ir_cng" />
             <field name="appears_on_payslip" eval="False" />
             <field name="condition_select">none</field>
             <field name="amount_select">code</field>
@@ -1455,8 +1455,8 @@ result = (min if ((CX70 * perc) &lt; min) else (max if ((CX70 * perc) &gt; max) 
             <field name="name">Impôt sur le revenu annuel</field>
             <field name="sequence" eval="193" />
             <field name="code">CX95</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.TAXX_C" />
-            <field name="parent_rule_id" ref="l10n_ergobit_payroll.erg_hr_pay_rule_ir_cng" />
+            <field name="category_id" ref="l10n_syscoa_payroll.TAXX_C" />
+            <field name="parent_rule_id" ref="l10n_syscoa_payroll.erg_hr_pay_rule_ir_cng" />
             <field name="appears_on_payslip" eval="False" />
             <field name="condition_select">none</field>
             <field name="amount_select">code</field>
@@ -1473,7 +1473,7 @@ result = (min if ((CX70 * perc) &lt; min) else (max if ((CX70 * perc) &gt; max) 
             <field name="name">Impôts/contributions</field>
             <field name="sequence" eval="205" />
             <field name="code">530</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.TAX" />
+            <field name="category_id" ref="l10n_syscoa_payroll.TAX" />
             <field name="appears_on_payslip" eval="True" />
             <field name="condition_select">none</field>
             <field name="amount_select">percentage</field>
@@ -1489,7 +1489,7 @@ result = (min if ((CX70 * perc) &lt; min) else (max if ((CX70 * perc) &gt; max) 
             <field name="name">TRIMF</field>
             <field name="sequence" eval="210" />
             <field name="code">550</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.TAX" />
+            <field name="category_id" ref="l10n_syscoa_payroll.TAX" />
             <field name="appears_on_payslip" eval="True" />
             <field name="condition_select">none</field>
             <field name="amount_select">code</field>
@@ -1501,8 +1501,8 @@ result = (min if ((CX70 * perc) &lt; min) else (max if ((CX70 * perc) &gt; max) 
             <field name="name">TRIMF de la période</field>
             <field name="sequence" eval="208" />
             <field name="code">550PRD</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.TRIMF" />
-            <field name="parent_rule_id" ref="l10n_ergobit_payroll.erg_hr_pay_rule_trimf" />
+            <field name="category_id" ref="l10n_syscoa_payroll.TRIMF" />
+            <field name="parent_rule_id" ref="l10n_syscoa_payroll.erg_hr_pay_rule_trimf" />
             <field name="appears_on_payslip" eval="False" />
             <field name="condition_select">none</field>
             <field name="amount_select">code</field>
@@ -1528,8 +1528,8 @@ result = trimf * employee.coef
             <field name="name">TRIMF du congé</field>
             <field name="sequence" eval="209" />
             <field name="code">550CNG</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.TRIMF" />
-            <field name="parent_rule_id" ref="l10n_ergobit_payroll.erg_hr_pay_rule_trimf" />
+            <field name="category_id" ref="l10n_syscoa_payroll.TRIMF" />
+            <field name="parent_rule_id" ref="l10n_syscoa_payroll.erg_hr_pay_rule_trimf" />
             <field name="appears_on_payslip" eval="False" />
             <field name="condition_select">none</field>
             <field name="amount_select">code</field>
@@ -1572,7 +1572,7 @@ result = trimf * employee.coef
             <field name="name">CFCE</field>
             <field name="sequence" eval="220" />
             <field name="code">570</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.TAXX" />
+            <field name="category_id" ref="l10n_syscoa_payroll.TAXX" />
             <field name="appears_on_payslip" eval="True" />
             <field name="condition_select">none</field>
             <field name="amount_select">percentage</field>
@@ -1919,7 +1919,7 @@ result = trimf * employee.coef
             <field name="name">Prime de panier</field>
             <field name="sequence" eval="405" />
             <field name="code">920</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.ALWN" />
+            <field name="category_id" ref="l10n_syscoa_payroll.ALWN" />
             <field name="condition_select">python</field>
             <field name="condition_python">result = (payslip.type != 'leaves') and contract.basket_bonus &gt; 0</field>
             <field name="amount_select">code</field>
@@ -1931,7 +1931,7 @@ result = trimf * employee.coef
             <field name="name">Indemnité de transport</field>
             <field name="sequence" eval="400" />
             <field name="code">900</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.ALWN" />
+            <field name="category_id" ref="l10n_syscoa_payroll.ALWN" />
             <field name="condition_select">python</field>
             <field name="condition_python">result = (payslip.type != 'leaves') and (contract.transport_refund + inputs.TRANSP.amount) &gt; 0</field>
             <field name="amount_select">code</field>
@@ -1942,14 +1942,14 @@ result = (contract.transport_refund * multiplicator) + inputs.TRANSP.amount
         <record id="erg_rule_input_transport_refund" model="hr.rule.input">
             <field name="name">Indemnité de transport</field>
             <field name="code">TRANSP</field>
-            <field name="input_id" ref="l10n_ergobit_payroll.erg_hr_pay_rule_transport_refund" />
+            <field name="input_id" ref="l10n_syscoa_payroll.erg_hr_pay_rule_transport_refund" />
         </record>
 
         <record id="erg_hr_pay_rule_kilometer_refund" model="hr.salary.rule">
             <field name="name">Indemnité kilométrique</field>
             <field name="sequence" eval="405" />
             <field name="code">910</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.ALWN" />
+            <field name="category_id" ref="l10n_syscoa_payroll.ALWN" />
             <field name="condition_select">python</field>
             <field name="condition_python">result = (payslip.type != 'leaves') and (contract.kilometer_refund + (inputs.KILOM.amount if inputs.KILOM else 0)) &gt; 0</field>
             <field name="amount_select">code</field>
@@ -1959,14 +1959,14 @@ result = (contract.transport_refund * multiplicator) + inputs.TRANSP.amount
         <record id="erg_rule_input_kilometer_refund" model="hr.rule.input">
             <field name="name">Indemnité kilométrique</field>
             <field name="code">KILOM</field>
-            <field name="input_id" ref="l10n_ergobit_payroll.erg_hr_pay_rule_kilometer_refund" />
+            <field name="input_id" ref="l10n_syscoa_payroll.erg_hr_pay_rule_kilometer_refund" />
         </record>
 
         <record id="erg_hr_pay_rule_meal_voucher" model="hr.salary.rule">
             <field name="name">Bon de repas</field>
             <field name="sequence" eval="410" />
             <field name="code">950</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.ALWN" />
+            <field name="category_id" ref="l10n_syscoa_payroll.ALWN" />
             <field name="condition_select">python</field>
             <field name="condition_python">result = (payslip.type != 'leaves') and (contract.meal_voucher + inputs.BONREP.amount) &gt; 0</field>
             <field name="amount_select">code</field>
@@ -1977,7 +1977,7 @@ result = (contract.meal_voucher * multiplicator) + inputs.BONREP.amount
         <record id="erg_rule_input_meal_voucher" model="hr.rule.input">
             <field name="name">Bon de repas</field>
             <field name="code">BONREP</field>
-            <field name="input_id" ref="l10n_ergobit_payroll.erg_hr_pay_rule_meal_voucher" />
+            <field name="input_id" ref="l10n_syscoa_payroll.erg_hr_pay_rule_meal_voucher" />
         </record>
 
         <!--syndicat  -->
@@ -1985,7 +1985,7 @@ result = (contract.meal_voucher * multiplicator) + inputs.BONREP.amount
             <field name="name">Cotisation syndicale</field>
             <field name="sequence" eval="420" />
             <field name="code">960</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.RETN" />
+            <field name="category_id" ref="l10n_syscoa_payroll.RETN" />
             <field name="condition_select">python</field>
             <field name="condition_python">result = (payslip.type != 'leaves') and (contract.union_fee &gt; 0)</field>
             <field name="amount_select">code</field>
@@ -2000,7 +2000,7 @@ result = (contract.meal_voucher * multiplicator) + inputs.BONREP.amount
             <field name="name">Paiement d'avance</field>
             <field name="sequence" eval="450" />
             <field name="code">980</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.AVCE" />
+            <field name="category_id" ref="l10n_syscoa_payroll.AVCE" />
             <field name="condition_select">python</field>
             <field name="condition_python">result = inputs.AVCEPAY.amount &gt; 0</field>
             <field name="amount_select">code</field>
@@ -2009,14 +2009,14 @@ result = (contract.meal_voucher * multiplicator) + inputs.BONREP.amount
         <record id="erg_hr_pay_rule_input_advance" model="hr.rule.input">
             <field name="name">Paiement d'avance</field>
             <field name="code">AVCEPAY</field>
-            <field name="input_id" ref="l10n_ergobit_payroll.erg_hr_pay_rule_advance" />
+            <field name="input_id" ref="l10n_syscoa_payroll.erg_hr_pay_rule_advance" />
         </record>
 
         <record id="erg_hr_pay_rule_payback" model="hr.salary.rule">
             <field name="name">Remboursement d'avance</field>
             <field name="sequence" eval="455" />
             <field name="code">985</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.PAYB" />
+            <field name="category_id" ref="l10n_syscoa_payroll.PAYB" />
             <field name="condition_select">python</field>
             <field name="condition_python">result = inputs.AVCEREM.amount &gt; 0</field>
             <field name="amount_select">code</field>
@@ -2025,14 +2025,14 @@ result = (contract.meal_voucher * multiplicator) + inputs.BONREP.amount
         <record id="erg_hr_pay_rule_input_payback" model="hr.rule.input">
             <field name="name">Rembousement d'avance</field>
             <field name="code">AVCEREM</field>
-            <field name="input_id" ref="l10n_ergobit_payroll.erg_hr_pay_rule_payback" />
+            <field name="input_id" ref="l10n_syscoa_payroll.erg_hr_pay_rule_payback" />
         </record>
 
         <record id="erg_hr_pay_rule_payback_ipm_mut" model="hr.salary.rule">
             <field name="name">Remboursement IPM/Mutuelle</field>
             <field name="sequence" eval="460" />
             <field name="code">990</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.PAYB" />
+            <field name="category_id" ref="l10n_syscoa_payroll.PAYB" />
             <field name="condition_select">python</field>
             <field name="condition_python">result = (inputs.REMIPM.amount if inputs.REMIPM else 0) &gt; 0</field>
             <field name="amount_select">code</field>
@@ -2041,7 +2041,7 @@ result = (contract.meal_voucher * multiplicator) + inputs.BONREP.amount
         <record id="erg_hr_pay_rule_input_payback_ipm_mut" model="hr.rule.input">
             <field name="name">Remboursement IPM/Mutuelle</field>
             <field name="code">REMIPM</field>
-            <field name="input_id" ref="l10n_ergobit_payroll.erg_hr_pay_rule_payback_ipm_mut" />
+            <field name="input_id" ref="l10n_syscoa_payroll.erg_hr_pay_rule_payback_ipm_mut" />
         </record>
 
         <!-- Net à payer -->
@@ -2074,7 +2074,7 @@ result = (contract.meal_voucher * multiplicator) + inputs.BONREP.amount
             <field name="name">Salaire net - Année</field>
             <field name="sequence" eval="550" />
             <field name="code">2000</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.TOTA" />
+            <field name="category_id" ref="l10n_syscoa_payroll.TOTA" />
             <field name="condition_select">none</field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">result = payslip.sum('1000', payslip.date_to[:4]+'-01-01', payslip.date_to) + categories.NET</field>
@@ -2084,7 +2084,7 @@ result = (contract.meal_voucher * multiplicator) + inputs.BONREP.amount
             <field name="name">Salaire net (prestataire) - Année</field>
             <field name="sequence" eval="560" />
             <field name="code">2020</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.TOTA" />
+            <field name="category_id" ref="l10n_syscoa_payroll.TOTA" />
             <field name="condition_select">none</field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">result = payslip.sum('1020', payslip.date_to[:4]+'-01-01', payslip.date_to) + categories.NET</field>
@@ -2094,7 +2094,7 @@ result = (contract.meal_voucher * multiplicator) + inputs.BONREP.amount
             <field name="name">Salaire brut - Periode</field>
             <field name="sequence" eval="600" />
             <field name="code">1100</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.TOTM" />
+            <field name="category_id" ref="l10n_syscoa_payroll.TOTM" />
             <field name="condition_select">none</field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">result = categories.GROSS</field>
@@ -2104,7 +2104,7 @@ result = (contract.meal_voucher * multiplicator) + inputs.BONREP.amount
             <field name="name">Salaire brut - Année</field>
             <field name="sequence" eval="605" />
             <field name="code">2100</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.TOTA" />
+            <field name="category_id" ref="l10n_syscoa_payroll.TOTA" />
             <field name="condition_select">none</field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">result = payslip.sum('1100', payslip.date_to[:4]+'-01-01', payslip.date_to) + categories.GROSS</field>
@@ -2114,7 +2114,7 @@ result = (contract.meal_voucher * multiplicator) + inputs.BONREP.amount
             <field name="name">Brut imposable - Période</field>
             <field name="sequence" eval="610" />
             <field name="code">1200</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.TOTM" />
+            <field name="category_id" ref="l10n_syscoa_payroll.TOTM" />
             <field name="condition_select">none</field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">res_external = categories.GROSS if (payslip.struct_id.code == "PRES") else 0
@@ -2127,7 +2127,7 @@ result = res_external + res_internal
             <field name="name">Brut imposable - Année</field>
             <field name="sequence" eval="615" />
             <field name="code">2200</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.TOTA" />
+            <field name="category_id" ref="l10n_syscoa_payroll.TOTA" />
             <field name="condition_select">none</field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">res_external = categories.GROSS if (payslip.struct_id.code == "PRES") else 0
@@ -2141,7 +2141,7 @@ result = payslip.sum('1200', payslip.date_to[:4]+'-01-01', payslip.date_to) + (r
             <field name="name">Charges salariales - Periode</field>
             <field name="sequence" eval="620" />
             <field name="code">1300</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.TOTM" />
+            <field name="category_id" ref="l10n_syscoa_payroll.TOTM" />
             <field name="condition_select">none</field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">result = categories.DED + categories.TAX</field>
@@ -2151,7 +2151,7 @@ result = payslip.sum('1200', payslip.date_to[:4]+'-01-01', payslip.date_to) + (r
             <field name="name">Charges salariales - Année</field>
             <field name="sequence" eval="625" />
             <field name="code">2300</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.TOTA" />
+            <field name="category_id" ref="l10n_syscoa_payroll.TOTA" />
             <field name="condition_select">none</field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">result = payslip.sum('1300', payslip.date_to[:4]+'-01-01', payslip.date_to) + categories.DED + categories.TAX</field>
@@ -2161,7 +2161,7 @@ result = payslip.sum('1200', payslip.date_to[:4]+'-01-01', payslip.date_to) + (r
             <field name="name">Charges patronales - Periode</field>
             <field name="sequence" eval="630" />
             <field name="code">1400</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.TOTM" />
+            <field name="category_id" ref="l10n_syscoa_payroll.TOTM" />
             <field name="condition_select">none</field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">result = categories.COMP</field>
@@ -2171,7 +2171,7 @@ result = payslip.sum('1200', payslip.date_to[:4]+'-01-01', payslip.date_to) + (r
             <field name="name">Charges patronales - Année</field>
             <field name="sequence" eval="635" />
             <field name="code">2400</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.TOTA" />
+            <field name="category_id" ref="l10n_syscoa_payroll.TOTA" />
             <field name="condition_select">none</field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">result = payslip.sum('1400', payslip.date_to[:4]+'-01-01', payslip.date_to) + categories.COMP</field>
@@ -2181,7 +2181,7 @@ result = payslip.sum('1200', payslip.date_to[:4]+'-01-01', payslip.date_to) + (r
             <field name="name">Heures prévues - Periode</field>
             <field name="sequence" eval="1" />
             <field name="code">B110</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.TOTM" />
+            <field name="category_id" ref="l10n_syscoa_payroll.TOTM" />
             <field name="condition_select">python</field>
             <field name="condition_python">result = payslip.struct_id.code &lt;&gt; "PRES"</field>
             <field name="amount_select">code</field>
@@ -2192,7 +2192,7 @@ result = payslip.sum('1200', payslip.date_to[:4]+'-01-01', payslip.date_to) + (r
             <field name="name">Heures travaillées - Periode</field>
             <field name="sequence" eval="640" />
             <field name="code">1500</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.TOTM" />
+            <field name="category_id" ref="l10n_syscoa_payroll.TOTM" />
             <field name="condition_select">python</field>
             <field name="condition_python">result = payslip.struct_id.code &lt;&gt; "PRES"</field>
             <field name="amount_select">code</field>
@@ -2203,7 +2203,7 @@ result = payslip.sum('1200', payslip.date_to[:4]+'-01-01', payslip.date_to) + (r
             <field name="name">Heures travaillées - Année</field>
             <field name="sequence" eval="645" />
             <field name="code">2500</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.TOTA" />
+            <field name="category_id" ref="l10n_syscoa_payroll.TOTA" />
             <field name="condition_select">python</field>
             <field name="condition_python">result = payslip.struct_id.code &lt;&gt; "PRES"</field>
             <field name="amount_select">code</field>
@@ -2214,7 +2214,7 @@ result = payslip.sum('1200', payslip.date_to[:4]+'-01-01', payslip.date_to) + (r
             <field name="name">Heures supplémentaires - Periode</field>
             <field name="sequence" eval="650" />
             <field name="code">1600</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.TOTM" />
+            <field name="category_id" ref="l10n_syscoa_payroll.TOTM" />
             <field name="condition_select">python</field>
             <field name="condition_python">result = payslip.struct_id.code &lt;&gt; "PRES"</field>
             <field name="amount_select">code</field>
@@ -2225,7 +2225,7 @@ result = payslip.sum('1200', payslip.date_to[:4]+'-01-01', payslip.date_to) + (r
             <field name="name">Heures supplémentaires - Année</field>
             <field name="sequence" eval="655" />
             <field name="code">2600</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.TOTA" />
+            <field name="category_id" ref="l10n_syscoa_payroll.TOTA" />
             <field name="condition_select">python</field>
             <field name="condition_python">result = payslip.struct_id.code &lt;&gt; "PRES"</field>
             <field name="amount_select">code</field>
@@ -2236,7 +2236,7 @@ result = payslip.sum('1200', payslip.date_to[:4]+'-01-01', payslip.date_to) + (r
             <field name="name">Avantages en nature - Periode</field>
             <field name="sequence" eval="660" />
             <field name="code">1700</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.TOTM" />
+            <field name="category_id" ref="l10n_syscoa_payroll.TOTM" />
             <field name="condition_select">none</field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">result = categories.NATU</field>
@@ -2246,7 +2246,7 @@ result = payslip.sum('1200', payslip.date_to[:4]+'-01-01', payslip.date_to) + (r
             <field name="name">Avantages en nature - Année</field>
             <field name="sequence" eval="665" />
             <field name="code">2700</field>
-            <field name="category_id" ref="l10n_ergobit_payroll.TOTA" />
+            <field name="category_id" ref="l10n_syscoa_payroll.TOTA" />
             <field name="condition_select">none</field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">result = payslip.sum('1700', payslip.date_to[:4]+'-01-01', payslip.date_to) + categories.NATU</field>
@@ -2420,11 +2420,11 @@ result = payslip.sum('1200', payslip.date_to[:4]+'-01-01', payslip.date_to) + (r
         </record>
 
         <!-- Decimal Precision -->
-        <record forcecreate="True" id="decimal_payroll_ergobit" model="decimal.precision">
+        <record forcecreate="True" id="decimal_payroll_syscoa" model="decimal.precision">
             <field name="name">ErgoBIT Payroll</field>
             <field name="digits">0</field>
         </record>
-        <record forcecreate="True" id="decimal_payroll_rate_ergobit" model="decimal.precision">
+        <record forcecreate="True" id="decimal_payroll_rate_syscoa" model="decimal.precision">
             <field name="name">ErgoBIT Payroll Rate</field>
             <field name="digits">2</field>
         </record>
@@ -2443,7 +2443,7 @@ result = payslip.sum('1200', payslip.date_to[:4]+'-01-01', payslip.date_to) + (r
             <field name="header_spacing" eval="15" />
             <field name="dpi" eval="90" />
             <field name="report_ids" eval="[(6, 0,
-                [ref('l10n_ergobit_payroll.action_ergobit_report_payslip')])]" />
+                [ref('l10n_syscoa_payroll.action_syscoa_report_payslip')])]" />
         </record>
 
 

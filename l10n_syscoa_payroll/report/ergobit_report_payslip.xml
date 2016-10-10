@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
-        <template id="ergobit_report_payslip">
+        <template id="syscoa_report_payslip">
             <t t-call="report.html_container">
                 <t t-foreach="docs" t-as="o">
 
@@ -9,7 +9,7 @@
 
                         <template id="payroll_css" inherit_id="web.layout">
                             <xpath expr="//head" position="inside">
-                                <link rel="stylesheet" href="/l10n_ergobit_payroll/static/src/css/payroll.css" />
+                                <link rel="stylesheet" href="/l10n_syscoa_payroll/static/src/css/payroll.css" />
                             </xpath>
                         </template>
 

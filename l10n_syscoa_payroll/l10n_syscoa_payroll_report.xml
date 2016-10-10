@@ -3,12 +3,12 @@
     <data>
 
         <report
-            id="action_ergobit_report_payslip"
+            id="action_syscoa_report_payslip"
             model="hr.payslip"
             string="Bulletin de paie"
             report_type="qweb-pdf"
-            name="l10n_ergobit_payroll.ergobit_report_payslip"
-            file="l10n_ergobit_payroll.ergobit_report_payslip"
+            name="l10n_syscoa_payroll.syscoa_report_payslip"
+            file="l10n_syscoa_payroll.syscoa_report_payslip"
         />
 
          <report

@@ -21,6 +21,6 @@
 #
 ##############################################################################
 
-from . import ergobit_report_payslip
+from . import syscoa_report_payslip
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

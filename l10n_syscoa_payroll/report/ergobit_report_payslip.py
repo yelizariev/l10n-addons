@@ -286,9 +286,9 @@ class ErgobitPayslipReport(report_sxw.rml_parse):
 
 
 class WrappedErgobitReportPayslip(models.AbstractModel):
-    _name = 'report.l10n_ergobit_payroll.ergobit_report_payslip'
+    _name = 'report.l10n_syscoa_payroll.syscoa_report_payslip'
     _inherit = 'report.abstract_report'
-    _template = 'l10n_ergobit_payroll.ergobit_report_payslip'
+    _template = 'l10n_syscoa_payroll.syscoa_report_payslip'
     _wrapped_report_class = ErgobitPayslipReport
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
