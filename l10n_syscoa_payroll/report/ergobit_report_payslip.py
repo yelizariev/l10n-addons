@@ -24,7 +24,7 @@
 from datetime import datetime
 from dateutil import parser
 from dateutil import relativedelta
-from openerp.osv import osv
+from openerp import models
 from openerp.report import report_sxw
 from datetime import date
 
@@ -285,7 +285,7 @@ class ErgobitPayslipReport(report_sxw.rml_parse):
             return formatl(res)
 
 
-class WrappedErgobitReportPayslip(osv.AbstractModel):
+class WrappedErgobitReportPayslip(models.AbstractModel):
     _name = 'report.l10n_ergobit_payroll.ergobit_report_payslip'
     _inherit = 'report.abstract_report'
     _template = 'l10n_ergobit_payroll.ergobit_report_payslip'

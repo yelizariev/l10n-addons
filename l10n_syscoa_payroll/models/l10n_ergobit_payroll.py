@@ -28,26 +28,26 @@ from dateutil import relativedelta
 
 from itertools import groupby
 
-from openerp.osv import fields, osv, orm
+from openerp import fields, models
 import openerp.addons.decimal_precision as dp
 from openerp.tools.translate import _
 
 
 
-class ResCompany(osv.osv):
+class ResCompany(models.Model):
     _inherit = 'res.company'
 
-    _columns = {
-        'governmental_org': fields.boolean('Organisme gouvernemental'),
-        'conv_coll_national': fields.char('Convention Collective Nationale'),
-        'css_percentage': fields.selection((('one', '1,0%'), ('three', '3,0%'), ('five', '5,0%')), required=True, default="three", string="CSS - Accident de travail"),
-        'waste_collection_company': fields.boolean("Entrep. de collecte d'ordure"),
-        # B        'mutual_insurance_employee':fields.float("Mutuelle - cotisation salariale", digits_compute=dp.get_precision('Account'), help=u"Cotisation salariale à la mutuelle d'assurance par employé."),
-        # B        'mutual_insurance_company':fields.float("Mutuelle - cotisation patronale", digits_compute=dp.get_precision('Account'), help="Cotisation patronale à la mutuelle d'assurance par employé."),
-    }
+
+    governmental_org = fields.Boolean('Organisme gouvernemental')
+    conv_coll_national = fields.Char('Convention Collective Nationale')
+    css_percentage = fields.Selection((('one', '1,0%'), ('three', '3,0%'), ('five', '5,0%')), required=True, default="three", string="CSS - Accident de travail")
+    waste_collection_company = fields.Boolean("Entrep. de collecte d'ordure")
+        # B    mutual_insurance_employee = fields.Float("Mutuelle - cotisation salariale", digits_compute=dp.get_precision('Account'), help=u"Cotisation salariale à la mutuelle d'assurance par employé.")
+        # B    mutual_insurance_company = fields.Float("Mutuelle - cotisation patronale", digits_compute=dp.get_precision('Account'), help="Cotisation patronale à la mutuelle d'assurance par employé.")
 
 
-class HrEmployee(osv.osv):
+
+class HrEmployee(models.Model):
     _inherit = 'hr.employee'
 
     def _calculate_social_parts(self, cr, uid, ids, name, args, context):
@@ -120,19 +120,19 @@ class HrEmployee(osv.osv):
             self.max_leaves = legal_leave.get_days(
                 self.id)[legal_leave.id]['max_leaves']
 
-    _columns = {
-        'social_parts': fields.function(_calculate_social_parts, method=True, type='float', string="Nombre de parts sociales", store=False),
-        'ipres_id': fields.char('N° IPRES'),
-        'css_id': fields.char('N° Sécurité Sociale'),
-        'status_spouse': fields.selection((('salaried', 'Salarié(e)'), ('non_salaried', 'Non-salarié(e)')), string='Statut du/de la conjoint(e)', default='salaried'),
-        'coef': fields.function(_calculate_coefficient, method=True, type='integer', string="Coefficient de TRIMF", store=True),
-        'matricule': fields.char('Matricule', size=64),
-        'max_leaves': fields.function(_user_left_days, type='float', string='Acquis', help='This value is given by the sum of all holidays requests with a positive value.', multi='user_left_days'),
-        'leaves_taken': fields.function(_user_left_days, type='float', string='Pris', help='This value is given by the sum of all holidays requests with a negative value.', multi='user_left_days'),
-    }
+
+    social_parts = fields.Float(compute="_calculate_social_parts", method=True, string="Nombre de parts sociales", store=False)
+    ipres_id = fields.Char('N° IPRES')
+    css_id = fields.Char('N° Sécurité Sociale')
+    status_spouse = fields.Selection((('salaried', 'Salarié(e)'), ('non_salaried', 'Non-salarié(e)')), string='Statut du/de la conjoint(e)', default='salaried')
+    coef = fields.Integer(compute="_calculate_coefficient", method=True, string="Coefficient de TRIMF", store=True)
+    matricule = fields.Char('Matricule', size=64)
+    max_leaves = fields.Float(compute="_user_left_days", string='Acquis', help='This value is given by the sum of all holidays requests with a positive value.',)
+    leaves_taken = fields.Float(compute="_user_left_days", string='Pris', help='This value is given by the sum of all holidays requests with a negative value.',)
 
 
-class HrContract(osv.osv):
+
+class HrContract(models.Model):
     _inherit = 'hr.contract'
 
     def _get_type(self, cr, uid, context=None):
@@ -278,78 +278,78 @@ class HrContract(osv.osv):
                     res[line.id] = 2.0
         return res
 
-    _columns = {
-        'type_id': fields.many2one('hr.contract.type', "Type de contrat", required=True),
-        'struct_id': fields.many2one('hr.payroll.structure', 'Structure salariale', required=True),
-        'governmental_org': fields.function(_read_governmental_org, method=True, type='boolean', string="Organisme gouvernemental"),
-        'functionary': fields.boolean("Fonctionnaire de l'état", help="Les fonctionnaires ont droit à une remise de 10% sur l'impôt sur le revenu. Si vous êtes une entreprise publique, alors vous pouvez configurer cette remise pour tous les employés dans les paramètres de la société"),
 
-        'time_mod': fields.selection((('fixed', 'Heures de travail fixes'), ('variable', 'Heures de travail variables')), string="Mode de gestion du temps", required=True, default="fixed"),
-        'time_fixed': fields.float(string="Nombre d'heures fixe prévues", default=173.33, required=True),
+    type_id = fields.Many2one('hr.contract.type', "Type de contrat", required=True)
+    struct_id = fields.Many2one('hr.payroll.structure', 'Structure salariale', required=True)
+    governmental_org = fields.Boolean(compute="_read_governmental_org", method=True, string="Organisme gouvernemental")
+    functionary = fields.Boolean("Fonctionnaire de l'état", help="Les fonctionnaires ont droit à une remise de 10% sur l'impôt sur le revenu. Si vous êtes une entreprise publique, alors vous pouvez configurer cette remise pour tous les employés dans les paramètres de la société")
 
-        'pay_mod': fields.selection((('Virement', 'Virement'), ('Cheque', 'Chèque'), ('Espece', 'Espèce')), 'Mode de paiement préféré'),
-        'qualif': fields.char("Qualification"),
-        'niveau': fields.function(_read_social_parts, method=True, type='char', string="Niveau"),
-        'coef': fields.function(_read_coefficient, method=True, type='integer', string="Coefficient"),
-        'indice': fields.char('Indice'),
-        'category': fields.char('Catégorie'),
+    time_mod = fields.Selection((('fixed', 'Heures de travail fixes'), ('variable', 'Heures de travail variables')), string="Mode de gestion du temps", required=True, default="fixed")
+    time_fixed = fields.Float(string="Nombre d'heures fixe prévues", default=173.33, required=True)
 
-        'gross_invoice_manual': fields.boolean("Montant brut facturé"),
-        'gross_invoice': fields.function(_get_gross_invoice, method=True, type='float', string="Montant brut facturé", digits_compute=dp.get_precision('Account')),
-        'additional_salary': fields.float('Sursalaire', digits_compute=dp.get_precision('Payroll')),
+    pay_mod = fields.Selection((('Virement', 'Virement'), ('Cheque', 'Chèque'), ('Espece', 'Espèce')), 'Mode de paiement préféré')
+    qualif = fields.Char("Qualification")
+    niveau = fields.Char(compute="_read_social_parts", method=True, string="Niveau")
+    coef = fields.Integer(compute="_read_coefficient", method=True, string="Coefficient")
+    indice = fields.Char('Indice')
+    category = fields.Char('Catégorie')
 
-        'union_fee': fields.float('Cotisation syndicale', digits_compute=dp.get_precision('Payroll')),
+    gross_invoice_manual = fields.Boolean("Montant brut facturé")
+    gross_invoice = fields.Float(compute="_get_gross_invoice", method=True, string="Montant brut facturé", digits_compute=dp.get_precision('Account'))
+    additional_salary = fields.Float('Sursalaire', digits_compute=dp.get_precision('Payroll'))
 
-        'performance_bonus': fields.float('Prime de rendement', digits_compute=dp.get_precision('Payroll')),
-        'gratification': fields.float('Gratification', digits_compute=dp.get_precision('Payroll')),
+    union_fee = fields.Float('Cotisation syndicale', digits_compute=dp.get_precision('Payroll'))
 
-        'seniority_date_manual': fields.boolean("Date de début", help="La date de début pour le calcul de l'ancienneté est normalement eǵale à la date de début du contrat. Mais vous pouvez la saisir manuellement en activant ce bouton."),
-        'seniority_date_manual_input': fields.date("Date de début", digits_compute=dp.get_precision('Payroll'), help="La date de début pour le calcul de l'ancienneté est normalement eǵale à la date de début du contrat. Mais vous pouvez la saisir manuellement en activant le bouton à côté."),
-        'seniority_date': fields.function(_get_seniority_date, method=True, type='date', string="Date de début", help="La date de début pour le calcul de l'ancienneté est normalement eǵale à la date de début du contrat. Mais vous pouvez la saisir manuellement en activant le bouton à côté."),
-        'seniority': fields.function(_get_seniority, method=True, type='char', string="Ancienneté"),
+    performance_bonus = fields.Float('Prime de rendement', digits_compute=dp.get_precision('Payroll'))
+    gratification = fields.Float('Gratification', digits_compute=dp.get_precision('Payroll'))
 
-        'seniority_allowance_manual': fields.boolean("Indemnité d'ancienneté", help="L'indemnité d'ancienneté est normalement calculée automatiquement. Mais vous pouvez le saisir manuellement en activant ce bouton."),
-        'seniority_allowance_manual_input': fields.float("Indemnité d'ancienneté", digits_compute=dp.get_precision('Payroll'), help="L'indemnité d'ancienneté est normalement calculée automatiquement. Mais vous pouvez le saisir manuellement en activant le bouton à côté."),
-        'seniority_allowance': fields.function(_calculate_seniority_allowance, method=True, type='float', string="Indemnité d'ancienneté", digits_compute=dp.get_precision('Account'), help="L'indemnité d'ancienneté est normalement calculée automatiquement. Mais vous pouvez le saisir manuellement en activant le bouton à côté."),
+    seniority_date_manual = fields.Boolean("Date de début", help="La date de début pour le calcul de l'ancienneté est normalement eǵale à la date de début du contrat. Mais vous pouvez la saisir manuellement en activant ce bouton.")
+    seniority_date_manual_input = fields.Date("Date de début", digits_compute=dp.get_precision('Payroll'), help="La date de début pour le calcul de l'ancienneté est normalement eǵale à la date de début du contrat. Mais vous pouvez la saisir manuellement en activant le bouton à côté.")
+    seniority_date = fields.Date(compute="_get_seniority_date", method=True, string="Date de début", help="La date de début pour le calcul de l'ancienneté est normalement eǵale à la date de début du contrat. Mais vous pouvez la saisir manuellement en activant le bouton à côté.")
+    seniority = fields.Char(compute="_get_seniority", method=True, string="Ancienneté")
 
-        'yearly_max_leaves': fields.float('Droit de congé par année (en jours)'),
-        'attribute_leave_days': fields.boolean("Attribuer les congés automatiquement", default=True),
-        'leave_days_manual': fields.boolean("Nombre de jours à attribuer par mois", help="Le nombre de jours est normalement eǵale à 2. Mais vous pouvez saisir un autre nombre en cochant le bouton à côté."),
-        'leave_days_manual_input': fields.float("Nombre de jours à attribuer par mois", default=2.5, help="Le nombre de jours est normalement eǵale à 2. Mais vous pouvez saisir un autre nombre en cochant le bouton à côté."),
-        'leave_days': fields.function(_get_leave_days, method=True, type='float', string="Nombre de jours à attribuer par mois", help="Le nombre de jours est normalement eǵale à 2,5. Mais vous pouvez saisir un autre nombre en cochant le bouton à côté."),
+    seniority_allowance_manual = fields.Boolean("Indemnité d'ancienneté", help="L'indemnité d'ancienneté est normalement calculée automatiquement. Mais vous pouvez le saisir manuellement en activant ce bouton.")
+    seniority_allowance_manual_input = fields.Float("Indemnité d'ancienneté", digits_compute=dp.get_precision('Payroll'), help="L'indemnité d'ancienneté est normalement calculée automatiquement. Mais vous pouvez le saisir manuellement en activant le bouton à côté.")
+    seniority_allowance = fields.Float(compute="_calculate_seniority_allowance", method=True, string="Indemnité d'ancienneté", digits_compute=dp.get_precision('Account'), help="L'indemnité d'ancienneté est normalement calculée automatiquement. Mais vous pouvez le saisir manuellement en activant le bouton à côté.")
 
-        'risk_bonus': fields.float('Prime de risque', digits_compute=dp.get_precision('Payroll')),
-        'home_bonus': fields.float('Prime de logement', digits_compute=dp.get_precision('Payroll')),
-        'cashpoint_bonus': fields.float('Prime de caisse', digits_compute=dp.get_precision('Payroll')),
-        'expatriation_bonus': fields.float("Prime d'expratriation", digits_compute=dp.get_precision('Payroll')),
-        'basket_bonus': fields.float('Prime de panier', digits_compute=dp.get_precision('Payroll')),
-        'responsability_bonus': fields.float('Prime de responsabilité', digits_compute=dp.get_precision('Payroll')),
-        'subjection_allowance': fields.float('Indemnité de sujétion', digits_compute=dp.get_precision('Payroll')),
+    yearly_max_leaves = fields.Float('Droit de congé par année (en jours)')
+    attribute_leave_days = fields.Boolean("Attribuer les congés automatiquement", default=True)
+    leave_days_manual = fields.Boolean("Nombre de jours à attribuer par mois", help="Le nombre de jours est normalement eǵale à 2. Mais vous pouvez saisir un autre nombre en cochant le bouton à côté.")
+    leave_days_manual_input = fields.Float("Nombre de jours à attribuer par mois", default=2.5, help="Le nombre de jours est normalement eǵale à 2. Mais vous pouvez saisir un autre nombre en cochant le bouton à côté.")
+    leave_days = fields.Float(compute="_get_leave_days", method=True, string="Nombre de jours à attribuer par mois", help="Le nombre de jours est normalement eǵale à 2,5. Mais vous pouvez saisir un autre nombre en cochant le bouton à côté.")
 
-        'food_advantage': fields.float('Avantage pour nourriture', digits_compute=dp.get_precision('Payroll')),
-        'domesticity_bonus': fields.float('Avantage pour logement et domesticité', digits_compute=dp.get_precision('Payroll')),
-        'family_advantage': fields.float('Avantages familiaux', digits_compute=dp.get_precision('Payroll')),
-        'company_car_advantage': fields.float('Avantage pour véhicule de fonction', digits_compute=dp.get_precision('Payroll')),
-        'company_phone_advantage': fields.float('Avantage pour téléphone', digits_compute=dp.get_precision('Payroll')),
-        'water_electricity_advantage': fields.float("Avantage pour fourniture d'eau et d'électricité", digits_compute=dp.get_precision('Payroll')),
+    risk_bonus = fields.Float('Prime de risque', digits_compute=dp.get_precision('Payroll'))
+    home_bonus = fields.Float('Prime de logement', digits_compute=dp.get_precision('Payroll'))
+    cashpoint_bonus = fields.Float('Prime de caisse', digits_compute=dp.get_precision('Payroll'))
+    expatriation_bonus = fields.Float("Prime d'expratriation", digits_compute=dp.get_precision('Payroll'))
+    basket_bonus = fields.Float('Prime de panier', digits_compute=dp.get_precision('Payroll'))
+    responsability_bonus = fields.Float('Prime de responsabilité', digits_compute=dp.get_precision('Payroll'))
+    subjection_allowance = fields.Float('Indemnité de sujétion', digits_compute=dp.get_precision('Payroll'))
 
-        'kilometer_refund': fields.float('Indemnité kilométrique', digits_compute=dp.get_precision('Payroll')),
-        'transport_refund': fields.float('Indemnité de transport', digits_compute=dp.get_precision('Payroll')),
-        'transport_refund_frequence': fields.selection((('day', 'Jour'), ('month', 'Mois')), 'Frequence des indemnités de transport', required=True),
-        'meal_voucher': fields.float('Bons de repas', digits_compute=dp.get_precision('Payroll')),
-        'meal_voucher_frequence': fields.selection((('day', 'Jour'), ('month', 'Mois')), 'Frequence des bons de repas', required=True),
+    food_advantage = fields.Float('Avantage pour nourriture', digits_compute=dp.get_precision('Payroll'))
+    domesticity_bonus = fields.Float('Avantage pour logement et domesticité', digits_compute=dp.get_precision('Payroll'))
+    family_advantage = fields.Float('Avantages familiaux', digits_compute=dp.get_precision('Payroll'))
+    company_car_advantage = fields.Float('Avantage pour véhicule de fonction', digits_compute=dp.get_precision('Payroll'))
+    company_phone_advantage = fields.Float('Avantage pour téléphone', digits_compute=dp.get_precision('Payroll'))
+    water_electricity_advantage = fields.Float("Avantage pour fourniture d'eau et d'électricité", digits_compute=dp.get_precision('Payroll'))
 
-        'mutual_insurance_empl_manual': fields.boolean("Cotisation salariale", help="La cotisation à la mutuelle d'assurance est normalement calculée automatiquement. Mais vous pouvez la saisir manuellement en activant ce bouton."),
-        'mutual_insurance_empl_manual_input': fields.float("Cotisation salariale", digits_compute=dp.get_precision('Payroll'), help="La cotisation à la mutuelle d'assurance est normalement calculée automatiquement. Mais vous pouvez la saisir manuellement en activant le bouton à côté."),
-        'mutual_insurance_empl': fields.function(_get_mutual_insurance_empl, method=True, type='float', string="Cotisation salariale", digits_compute=dp.get_precision('Account'), help="La cotisation à la mutuelle d'assurance est normalement calculée automatiquement. Mais vous pouvez la saisir manuellement en activant le bouton à côté."),
+    kilometer_refund = fields.Float('Indemnité kilométrique', digits_compute=dp.get_precision('Payroll'))
+    transport_refund = fields.Float('Indemnité de transport', digits_compute=dp.get_precision('Payroll'))
+    transport_refund_frequence = fields.Selection((('day', 'Jour'), ('month', 'Mois')), 'Frequence des indemnités de transport', required=True)
+    meal_voucher = fields.Float('Bons de repas', digits_compute=dp.get_precision('Payroll'))
+    meal_voucher_frequence = fields.Selection((('day', 'Jour'), ('month', 'Mois')), 'Frequence des bons de repas', required=True)
 
-        'mutual_insurance_comp_manual': fields.boolean("Cotisation patronale", help="La cotisation à la mutuelle d'assurance est normalement calculée automatiquement. Mais vous pouvez la saisir manuellement en activant ce bouton."),
-        'mutual_insurance_comp_manual_input': fields.float("Cotisation patronale", digits_compute=dp.get_precision('Payroll'), help="La cotisation à la mutuelle d'assurance est normalement calculée automatiquement. Mais vous pouvez la saisir manuellement en activant le bouton à côté."),
-        'mutual_insurance_comp': fields.function(_get_mutual_insurance_comp, method=True, type='float', string="Cotisation patronale", digits_compute=dp.get_precision('Account'), help="La cotisation à la mutuelle d'assurance est normalement calculée automatiquement. Mais vous pouvez la saisir manuellement en activant le bouton à côté."),
+    mutual_insurance_empl_manual = fields.Boolean("Cotisation salariale", help="La cotisation à la mutuelle d'assurance est normalement calculée automatiquement. Mais vous pouvez la saisir manuellement en activant ce bouton.")
+    mutual_insurance_empl_manual_input = fields.Float("Cotisation salariale", digits_compute=dp.get_precision('Payroll'), help="La cotisation à la mutuelle d'assurance est normalement calculée automatiquement. Mais vous pouvez la saisir manuellement en activant le bouton à côté.")
+    mutual_insurance_empl = fields.Float(compute="_get_mutual_insurance_empl", method=True, string="Cotisation salariale", digits_compute=dp.get_precision('Account'), help="La cotisation à la mutuelle d'assurance est normalement calculée automatiquement. Mais vous pouvez la saisir manuellement en activant le bouton à côté.")
 
-        'dirtiness_allowance': fields.float('Prime de salissure', digits_compute=dp.get_precision('Payroll')),
+    mutual_insurance_comp_manual = fields.Boolean("Cotisation patronale", help="La cotisation à la mutuelle d'assurance est normalement calculée automatiquement. Mais vous pouvez la saisir manuellement en activant ce bouton.")
+    mutual_insurance_comp_manual_input = fields.Float("Cotisation patronale", digits_compute=dp.get_precision('Payroll'), help="La cotisation à la mutuelle d'assurance est normalement calculée automatiquement. Mais vous pouvez la saisir manuellement en activant le bouton à côté.")
+    mutual_insurance_comp = fields.Float(compute="_get_mutual_insurance_comp", method=True, string="Cotisation patronale", digits_compute=dp.get_precision('Account'), help="La cotisation à la mutuelle d'assurance est normalement calculée automatiquement. Mais vous pouvez la saisir manuellement en activant le bouton à côté.")
 
-    }
+    dirtiness_allowance = fields.Float('Prime de salissure', digits_compute=dp.get_precision('Payroll'))
+
+
 
     _defaults = {
         'transport_refund_frequence': 'month',
@@ -363,7 +363,7 @@ class HrContract(osv.osv):
     }
 
 
-class HrPayslip(osv.osv):
+class HrPayslip(models.Model):
     '''
     Pay Slip
     '''
@@ -381,7 +381,7 @@ class HrPayslip(osv.osv):
     def hr_verify_sheet(self, cr, uid, ids, context=None):
         for payslip in self.browse(cr, uid, ids, context=context):
             if not payslip.employee_id.address_home_id:
-                raise orm.except_orm(
+                raise models.except_orm(
                     _('Warning'), _("L'employé '%s' n'a pas d'adresse personnelle. \nVeuillez renseigner son adresse personnelle dans la fiche de l'employé, \nonglet 'Information personnelle'") % (payroll.employee_id.name,))
         res = super(HrPayslip, self).hr_verify_sheet(cr, uid, ids)
         # Set additional leaves
@@ -518,27 +518,27 @@ class HrPayslip(osv.osv):
                 }
         return res
 
-    _columns = {
-        'type': fields.selection((('salary', 'Salaire'), ('leaves', 'Congé'), ('mix', 'Salaire et Congé')), readonly=True, states={'draft': [('readonly', False)]}, required=True, default="salary", string="Type de bulletin"),
-        'pay_date': fields.date('Date de Paiement'),
-        'pay_mod': fields.selection((('Virement', 'Virement'), ('Cheque', 'Chèque'), ('Espece', 'Espèce')), 'Mode de Paiement'),
-        'is_waste_collector': fields.function(_get_waste_collector, method=True, type='boolean', store=False),
-        'quantity_delivred': fields.function(_calculate_rendement, method=True, type='float', digits_compute=dp.get_precision('Product UoS'), store=True, multi=True),
-        'amount_invoiced': fields.function(_calculate_rendement, method=True, type='float', digits_compute=dp.get_precision('Payroll'), store=True, multi=True),
-        'leave_days_won': fields.float(string="À ajouter", readonly=True, states={'draft': [('readonly', False)]}, help="Le nombre de jours de congés acquis par l'emploi dans le mois payé."),
-        'max_leaves': fields.function(_compute_leave_days, type='float', string='Acquis', store=True, help='This value is given by the sum of all holidays requests with a positive value.', multi='user_left_days'),
-        'leaves_taken': fields.function(_compute_leave_days, type='float', string='Pris', store=True, help='This value is given by the sum of all holidays requests with a negative value.', multi='user_left_days'),
-        'remaining_leaves': fields.function(_compute_leave_days, type='float', string='Restant', store=True, help='Maximum Leaves Allowed - Leaves Already Taken', multi='user_left_days'),
-        'max_leaves_n1': fields.function(_compute_leave_days, type='float', string='Acquis N-1', store=True, help='This value is given by the sum of all holidays requests with a positive value.', multi='user_left_days'),
-        'leaves_taken_n1': fields.function(_compute_leave_days, type='float', string='Pris N-1', store=True, help='This value is given by the sum of all holidays requests with a negative value.', multi='user_left_days'),
-        'remaining_leaves_n1': fields.function(_compute_leave_days, type='float', string='Restant N-1', store=True, help='Maximum Leaves Allowed - Leaves Already Taken', multi='user_left_days'),
-        'max_leaves_n2': fields.function(_compute_leave_days, type='float', string='Acquis N-2', store=True, help='This value is given by the sum of all holidays requests with a positive value.', multi='user_left_days'),
-        'leaves_taken_n2': fields.function(_compute_leave_days, type='float', string='Pris N-2', store=True, help='This value is given by the sum of all holidays requests with a negative value.', multi='user_left_days'),
-        'remaining_leaves_n2': fields.function(_compute_leave_days, type='float', string='Restant N-2', store=True, help='Maximum Leaves Allowed - Leaves Already Taken', multi='user_left_days'),
-        'holiday_allowance_manual': fields.boolean("Montant brut de l'indemnité", readonly=True, states={'draft': [('readonly', False)]}, help="Le montant du droit de congé est normalement calculé automatiquement. Mais vous pouvez le saisir manuellement en activant le bouton à côté."),
-        'holiday_allowance_manual_input': fields.float("Montant brut de l'indemnité", readonly=True, states={'draft': [('readonly', False)]}, digits_compute=dp.get_precision('Payroll'), help="Le montant du droit de congé est normalement calculé automatiquement. Mais vous pouvez le saisir manuellement en activant le bouton à côté."),
-        'holiday_allowance': fields.function(_get_holiday_allowance, method=True, type='float', string="Montant brut de l'indemnité", store=True, digits_compute=dp.get_precision('Payroll'), help="Le montant du droit de congé est normalement calculé automatiquement. Mais vous pouvez le saisir manuellement en activant le bouton à côté."),
-    }
+
+    type = fields.Selection((('salary', 'Salaire'), ('leaves', 'Congé'), ('mix', 'Salaire et Congé')), readonly=True, states={'draft': [('readonly', False)]}, required=True, default="salary", string="Type de bulletin")
+    pay_date = fields.Date('Date de Paiement')
+    pay_mod = fields.Selection((('Virement', 'Virement'), ('Cheque', 'Chèque'), ('Espece', 'Espèce')), 'Mode de Paiement')
+    is_waste_collector = fields.Boolean(compute="_get_waste_collector", method=True, store=False)
+    quantity_delivred = fields.Float(compute="_calculate_rendement", method=True, digits_compute=dp.get_precision('Product UoS'), store=True,)
+    amount_invoiced = fields.Float(compute="_calculate_rendement", method=True, digits_compute=dp.get_precision('Payroll'), store=True,)
+    leave_days_won = fields.Float(string="À ajouter", readonly=True, states={'draft': [('readonly', False)]}, help="Le nombre de jours de congés acquis par l'emploi dans le mois payé.")
+    max_leaves = fields.Float(compute="_compute_leave_days", string='Acquis', store=True, help='This value is given by the sum of all holidays requests with a positive value.',)
+    leaves_taken = fields.Float(compute="_compute_leave_days", string='Pris', store=True, help='This value is given by the sum of all holidays requests with a negative value.',)
+    remaining_leaves = fields.Float(compute="_compute_leave_days", string='Restant', store=True, help='Maximum Leaves Allowed - Leaves Already Taken',)
+    max_leaves_n1 = fields.Float(compute="_compute_leave_days", string='Acquis N-1', store=True, help='This value is given by the sum of all holidays requests with a positive value.',)
+    leaves_taken_n1 = fields.Float(compute="_compute_leave_days", string='Pris N-1', store=True, help='This value is given by the sum of all holidays requests with a negative value.',)
+    remaining_leaves_n1 = fields.Float(compute="_compute_leave_days", string='Restant N-1', store=True, help='Maximum Leaves Allowed - Leaves Already Taken',)
+    max_leaves_n2 = fields.Float(compute="_compute_leave_days", string='Acquis N-2', store=True, help='This value is given by the sum of all holidays requests with a positive value.',)
+    leaves_taken_n2 = fields.Float(compute="_compute_leave_days", string='Pris N-2', store=True, help='This value is given by the sum of all holidays requests with a negative value.',)
+    remaining_leaves_n2 = fields.Float(compute="_compute_leave_days", string='Restant N-2', store=True, help='Maximum Leaves Allowed - Leaves Already Taken',)
+    holiday_allowance_manual = fields.Boolean("Montant brut de l'indemnité", readonly=True, states={'draft': [('readonly', False)]}, help="Le montant du droit de congé est normalement calculé automatiquement. Mais vous pouvez le saisir manuellement en activant le bouton à côté.")
+    holiday_allowance_manual_input = fields.Float("Montant brut de l'indemnité", readonly=True, states={'draft': [('readonly', False)]}, digits_compute=dp.get_precision('Payroll'), help="Le montant du droit de congé est normalement calculé automatiquement. Mais vous pouvez le saisir manuellement en activant le bouton à côté.")
+    holiday_allowance = fields.Float(compute="_get_holiday_allowance", method=True, string="Montant brut de l'indemnité", store=True, digits_compute=dp.get_precision('Payroll'), help="Le montant du droit de congé est normalement calculé automatiquement. Mais vous pouvez le saisir manuellement en activant le bouton à côté.")
+
 
     _defaults = {
         'pay_date': lambda *a: time.strftime("%Y-%m-%d"),
@@ -632,7 +632,7 @@ class HrPayslip(osv.osv):
         return res
 
 
-class HrPayslipLine(osv.osv):
+class HrPayslipLine(models.Model):
     '''
     Payslip Line
     '''
@@ -647,13 +647,13 @@ class HrPayslipLine(osv.osv):
             res[line.id] = float(line.quantity2) * line.amount2 * line.rate2 / 100
         return res
 
-    _columns = {
 
-        'rate2': fields.float('Rate2 (%)', digits_compute=dp.get_precision('Payroll Rate')),
-        'amount2': fields.float('Amount2', digits_compute=dp.get_precision('Payroll')),
-        'quantity2': fields.float('Quantity2', digits_compute=dp.get_precision('Payroll')),
-        'total2': fields.function(_calculate_total2, method=True, type='float', string='Total2', digits_compute=dp.get_precision('Payroll'), store=True),
-    }
+
+    rate2 = fields.Float('Rate2 (%)', digits_compute=dp.get_precision('Payroll Rate'))
+    amount2 = fields.Float('Amount2', digits_compute=dp.get_precision('Payroll'))
+    quantity2 = fields.Float('Quantity2', digits_compute=dp.get_precision('Payroll'))
+    total2 = fields.Float(compute="_calculate_total2", method=True, string='Total2', digits_compute=dp.get_precision('Payroll'), store=True)
+
 
     _defaults = {
         'quantity2': 1.0,
@@ -661,6 +661,6 @@ class HrPayslipLine(osv.osv):
     }
 
 
-class HrPayslipRun(osv.osv):
+class HrPayslipRun(models.Model):
     _inherit = 'hr.payslip.run'
     _order = 'id desc'
