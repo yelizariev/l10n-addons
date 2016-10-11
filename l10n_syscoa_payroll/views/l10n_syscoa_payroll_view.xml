@@ -9,7 +9,8 @@
             <field name="inherit_id" ref="base.view_company_form" />
             <field name="arch" type="xml">
                 <data>
-                    <xpath expr="//group[@name='account_grp']" position="after">
+                    <xpath expr="//notebook" position="inside">
+                        <page string="Configuration"><group>
                         <group string="Paie">
                             <field name="governmental_org" />
                             <newline />
@@ -25,6 +26,7 @@
                             <field name="mutual_insurance_company" />
 -->
                         </group>
+                        </group></page>
                     </xpath>
                 </data>
             </field>
@@ -280,7 +282,7 @@
             <field name="inherit_id" ref="hr_payroll.view_hr_payslip_tree" />
             <field name="arch" type="xml">
                 <data>
-                    <xpath expr="//tree[@string='Payslips']/field[@name='employee_id']" position="after">
+                    <xpath expr="//field[@name='employee_id']" position="after">
                         <field name="type" />
                     </xpath>
                 </data>
@@ -304,7 +306,7 @@
                     </xpath>
 
                     <xpath expr="//field[@name='worked_days_line_ids']" position="replace" />
-                    <xpath expr="//separator[@string='Worked Days']" position="replace">
+                    <xpath expr="//notebook/page[1]/separator[1]" position="replace">
 
                         <group  col="4">
 
@@ -354,16 +356,16 @@
                         </group>
                     </xpath>
 
-                    <xpath expr="//tree[@string='Input Data']/field[@name='name']" position="attributes" >
+                    <xpath expr="//field[@name='input_line_ids']/tree/field[@name='name']" position="attributes" >
                         <attribute name="attrs">{'readonly': True}</attribute>
                     </xpath>
-                    <xpath expr="//tree[@string='Input Data']/field[@name='code']" position="attributes" >
+                    <xpath expr="//field[@name='input_line_ids']/tree/field[@name='code']" position="attributes" >
                         <attribute name="attrs">{'readonly': True}</attribute>
                     </xpath>
-                    <xpath expr="//tree[@string='Input Data']/field[@name='contract_id']" position="attributes" >
+                    <xpath expr="//field[@name='input_line_ids']/tree/field[@name='contract_id']" position="attributes" >
                         <attribute name="attrs">{'readonly': True}</attribute>
                     </xpath>
-                    <xpath expr="//tree[@string='Input Data']" position="attributes" >
+                    <xpath expr="//field[@name='input_line_ids']/tree" position="attributes" >
                         <attribute name="create">false</attribute>
                         <attribute name="delete">false</attribute>
                     </xpath>
@@ -371,11 +373,11 @@
                         <attribute name="readonly">True</attribute>
                     </xpath>
 
-                    <xpath expr="//page[@string='Details By Salary Rule Category']" position="attributes">
+                    <xpath expr="//field[@name='details_by_salary_rule_category']/.." position="attributes">
                         <attribute name="invisible">True</attribute>
                     </xpath>
 
-                    <page string="Worked Days &amp; Inputs" position="after">
+                    <xpath expr="//notebook/page[1]" position="after">
                         <page name="leaves" string="Congés des années précédentes">
 
                             <group colspan="4" col="4">
@@ -392,7 +394,7 @@
                             </group>
 
                         </page>
-                    </page>
+                    </xpath>
 
                     <xpath expr="//field[@name='paid']" position="after">
                         <field name="pay_date" />
